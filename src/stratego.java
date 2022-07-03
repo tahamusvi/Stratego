@@ -8,7 +8,7 @@ public class stratego {
 //                for(int i =0;i<2;i++){
 //                    System.out.println(a[i]);                 Move marshal
 //                }
-//                System.out.println("--------");
+                System.out.println(mar);
 //            }
 //
 //        }

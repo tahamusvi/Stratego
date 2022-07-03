@@ -1,8 +1,10 @@
 public abstract class piece {
     private int Score;
+    private String name;
     private boolean color;
 //    true --> red
 //    false --> blue
+    private int amountInsert = 0;
     private int amount;
     public int[][] canMove(int i,int j){
 
@@ -60,7 +62,35 @@ public abstract class piece {
         Score = score;
     }
 
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public int getAmountInsert() {
+        return amountInsert;
+    }
+
+    public void AmountInsertIncreace() {
+        this.amountInsert ++;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
     public void setColor(boolean color) {
         this.color = color;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String toString(){
+        return this.getName();
     }
 }

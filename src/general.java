@@ -1,8 +1,8 @@
-public class marshal extends piece{
-    public marshal(){
-        this.setName("marshal");
+public class general extends piece {
+    public general(){
+        this.setName("general");
         this.setAmount(1);
-        this.setScore(12);
+        this.setScore(11);
     }
     public boolean attack(piece markPiece){
         if(this.getScore()>markPiece.getScore()){
@@ -12,4 +12,5 @@ public class marshal extends piece{
         }
 
     }
+
 }

@@ -44,10 +44,15 @@ public class table {
         System.out.println("Start Game: ");
         int insPiece = 0 ;
         System.out.println("Pieces: ");
-        while(insPiece == 41){
-            int marshal = 1;
-            int general = 2;
 
+        piece[] pieces = new piece[1];
+
+        pieces[0] = new marshal();
+
+        for(piece mark : pieces){
+            if(mark.getAmount()!= mark.getAmountInsert()){
+                System.out.println(mark + " left :" + (mark.getAmount()-mark.getAmountInsert()));
+            }
         }
 
     }
@@ -61,6 +66,7 @@ public class table {
 
 
         table str = new table(10,10);
+        str.game();
 
 
     }
