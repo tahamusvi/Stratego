@@ -91,6 +91,31 @@ public abstract class piece {
     }
 
     public String toString(){
-        return this.getName();
+        int len = this.getName().length();
+
+        len = 10 - len;
+
+        String tempName = "";
+
+        if(len % 2 == 0){
+            for(int i =0;i<len/2;i++){
+                tempName += " ";
+            }
+            tempName +=  this.getName();
+            for(int i =0;i<len/2;i++){
+                tempName += " ";
+            }
+        }
+        else{
+            for(int i =0;i<(len-1)/2;i++){
+                tempName += " ";
+            }
+            tempName +=  this.getName();
+            for(int i =0;i<(len+1)/2;i++){
+                tempName += " ";
+            }
+
+        }
+        return tempName;
     }
 }
