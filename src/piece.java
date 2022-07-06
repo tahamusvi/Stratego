@@ -9,9 +9,6 @@ public abstract class piece {
     private int amountInsert = 0;
     private int amount;
 
-
-
-
     public piece(player ply){
         this.owner = ply;
 

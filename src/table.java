@@ -1,33 +1,28 @@
+import java.io.*;
 import java.util.Scanner;
 
 public class table {
     private int width = 1;
     private int length = 1;
     private piece[][] map ;
-
     public table(int width,int length){
         setLength(length);
         setWidth(width);
         map = new piece[getWidth()][getLength()];
 
     }
-
     public int getWidth() {
         return width;
     }
-
     public int getLength() {
         return length;
     }
-
     public void setLength(int length) {
         this.length = length;
     }
-
     public void setWidth(int width) {
         this.width = width;
     }
-
     public void print(){
         for(int i = 0;i<getLength();i++){
             for(int j = 0;j<getWidth();j++){
@@ -35,13 +30,11 @@ public class table {
             }
         }
     }
-
     public boolean canMovePiece(int i,int j){
         piece mark = map[i][j];
         mark.canMove(i,j);
         return true;
     }
-
     public int getPositiony(){
         Scanner sc = new Scanner(System.in);
         int i = sc.nextInt();
@@ -51,7 +44,6 @@ public class table {
         }
         return i ;
     }
-
     public int getPositionx(){
         Scanner sc = new Scanner(System.in);
         int i = sc.nextInt();
@@ -61,7 +53,6 @@ public class table {
         }
         return i ;
     }
-
     public piece[] piecesForPlayer(player ply){
         piece[] pieces = new piece[12];
 
@@ -80,9 +71,8 @@ public class table {
         ply.pieces = pieces;
         return pieces;
     }
-
     public void layoutPlayer(player ply){
-        System.out.println("Start Game: ");
+        System.out.println("Start layout: ");
         int insPiece = 0 ;
         System.out.println("Pieces: ");
 
@@ -413,36 +403,88 @@ public class table {
                    insertedPiece += mark.getAmountInsert();
                }
            }
-           if(insertedPiece == 41){
+           if(insertedPiece == 40){
                cunt = false;
            }
 
            this.printmap();
 
        }
+       this.writeTxt();
+    }
+    public void writeTxt(){
+        try {
+            FileWriter fw = new FileWriter("StrategoMap.txt");
 
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            for(int i=0;i<10;i++){
+                for(int j=6;j<10;j++){
+                    bw.write(map[j][i].getName()+","+i+","+j);
+                    bw.newLine();
+                }
+            }
+
+            bw.close();
+        }
+        catch(IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
+    public void layoutFromFile(String fileName){
+        player ply = new player("palyer 1");
+        piece[] pieces = this.piecesForPlayer(ply);
+        String line = null;
+        piece mark = null;
+
+        try {
+            FileReader fr = new FileReader(fileName);
+
+            BufferedReader br = new BufferedReader(fr);
+
+            while( (line = br.readLine() ) != null ) {
+                String[] array = line.split(",");
+
+                for(int i=0;i<12;i++){
+                    if(array[0].equals(pieces[i].getName())){
+                         mark = pieces[i];
+
+                    }
+                }
+                map[Integer.valueOf(array[2])][Integer.valueOf(array[1])] = mark;
+            }
+
+            br.close();
+
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
     public boolean insertPiece(int length,int width,piece newPiece){
         map[width][length] = newPiece;
         newPiece.AmountInsertIncreace();
         return true;
     }
-
     public void ofogh(piece mark){
         if(mark==null){
             String space = "          ";
             System.out.print("|" + space );
         }
         else{
-            System.out.print("|" + mark );
+            if(mark.getOwner().name == "bot"){
+                System.out.print("|" + "    op    " );
+            }
+            else{
+                System.out.print("|" + mark );
+            }
         }
 
     }
     public void emod(){
         System.out.print("-");
     }
-
     public void printmap(){
         piece islands = new island(new player("table"));
         for(int i =0;i<110;i++){
@@ -472,7 +514,6 @@ public class table {
             System.out.println("");
         }
     }
-
     public player layoutBot(){
         player bot = new player("bot");
         piece[] pieces = this.piecesForPlayer(bot);
@@ -523,7 +564,6 @@ public class table {
 
         return bot;
     }
-
     public player layoutPlayerCustom(String name){
         player ply = new player(name);
         piece[] pieces = this.piecesForPlayer(ply);
@@ -574,9 +614,9 @@ public class table {
 
         return ply;
     }
-
     public boolean movePiecePlayer(int i,int j, String t){
         piece mark = map[j][i];
+
         int[][] movement = mark.canMove(i,j);
         switch (t){
             case "u":
@@ -586,6 +626,7 @@ public class table {
                         if(map[j-1][i]==null){
                             map[j][i] = null;
                             map[j-1][i] = mark;
+                            System.out.println(mark.getOwner() +"'s " +  mark.getName() + " moved");
                             return true;
                         }
                         else{
@@ -594,6 +635,7 @@ public class table {
                             }
                             else{
                                 if(mark.getScore()==map[j-1][i].getScore()){
+                                    System.out.println(mark.getOwner() +"'s " + mark.getName() + " attacked " + map[j-1][i].getName()+ " --> both removed");
                                     map[j][i].AmountInsertDecreace();
                                     map[j-1][i].AmountInsertDecreace();
                                     map[j][i] = null;
@@ -602,12 +644,14 @@ public class table {
                                 }
                                 else{
                                     if(mark.attack(map[j-1][i])){
+                                        System.out.println(mark.getOwner() +"'s " +  mark.getName() + " attacked " +  map[j-1][i].getName()+ " --> "+ map[j-1][i].getName() +" removed");
                                         map[j-1][i].AmountInsertDecreace();
                                         map[j][i] = null;
                                         map[j-1][i] = mark;
                                         return true;
                                     }
                                     else{
+                                        System.out.println(mark.getOwner() +"'s " +  mark.getName() + " attacked " + mark.getName()+ " --> both removed");
                                         map[j][i].AmountInsertDecreace();
                                         map[j][i] = null;
                                         return true;
@@ -740,7 +784,175 @@ public class table {
         System.out.println("Movement is not true");
         return false;
     }
+    public boolean moveScout(int i,int j,String t ,int k){
+        piece mark = map[j][i];
 
+        int[][] movement = mark.canMove(i,j);
+        switch (t){
+            case "u":
+                for(int c=0;c<36;c++){
+                    if((movement[c][0]==i)&&(movement[c][1]==j-k)){
+                        if(map[j-k][i]==null){
+                            map[j][i] = null;
+                            map[j-k][i] = mark;
+                            System.out.println(mark.getOwner() +"'s " +  mark.getName() + " moved");
+                            return true;
+                        }
+                        else{
+                            if(mark.getOwner()==map[j-k][i].getOwner()){
+                                break;
+                            }
+                            else{
+                                if(mark.getScore()==map[j-k][i].getScore()){
+                                    System.out.println(mark.getOwner() +"'s " + mark.getName() + " attacked " + map[j-k][i].getName()+ " --> both removed");
+                                    map[j][i].AmountInsertDecreace();
+                                    map[j-k][i].AmountInsertDecreace();
+                                    map[j][i] = null;
+                                    map[j-k][i] = null;
+                                    return true;
+                                }
+                                else{
+                                    if(mark.attack(map[j-k][i])){
+                                        System.out.println(mark.getOwner() +"'s " +  mark.getName() + " attacked " +  map[j-k][i].getName()+ " --> "+ map[j-k][i].getName() +" removed");
+                                        map[j-k][i].AmountInsertDecreace();
+                                        map[j][i] = null;
+                                        map[j-k][i] = mark;
+                                        return true;
+                                    }
+                                    else{
+                                        System.out.println(mark.getOwner() +"'s " +  mark.getName() + " attacked " + mark.getName()+ " --> both removed");
+                                        map[j][i].AmountInsertDecreace();
+                                        map[j][i] = null;
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                break;
+            case "b":
+                for(int c=0;c<36;c++){
+                    if((movement[c][0]==i)&&(movement[c][1]==j+k)){
+                        if(map[j+k][i]==null){
+                            map[j][i] = null;
+                            map[j+k][i] = mark;
+                            return true;
+                        }
+                        else{
+                            if(mark.getOwner()==map[j+k][i].getOwner()){
+                                break;
+                            }
+                            else{
+                                if(mark.getScore()==map[j+k][i].getScore()){
+                                    map[j][i].AmountInsertDecreace();
+                                    map[j+k][i].AmountInsertDecreace();
+                                    map[j][i] = null;
+                                    map[j+k][i] = null;
+                                    return true;
+                                }
+                                else{
+                                    if(mark.attack(map[j+k][i])){
+                                        map[j+k][i].AmountInsertDecreace();
+                                        map[j][i] = null;
+                                        map[j+k][i] = mark;
+                                        return true;
+                                    }
+                                    else{
+                                        map[j][i].AmountInsertDecreace();
+                                        map[j][i] = null;
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                break;
+            case "r":
+                for(int c=0;c<4;c++){
+                    if((movement[c][0]==i+1)&&(movement[c][1]==j)){
+                        if(map[j][i+k]==null){
+                            map[j][i] = null;
+                            map[j][i+k] = mark;
+                            return true;
+                        }
+                        else{
+                            if(mark.getOwner()==map[j][i+k].getOwner()){
+                                break;
+                            }
+                            else{
+                                if(mark.getScore()==map[j][i+k].getScore()){
+                                    map[j][i].AmountInsertDecreace();
+                                    map[j][i+k].AmountInsertDecreace();
+                                    map[j][i] = null;
+                                    map[j][i+k] = null;
+                                    return true;
+                                }
+                                else{
+                                    if(mark.attack(map[j][i+k])){
+                                        map[j][i+k].AmountInsertDecreace();
+                                        map[j][i] = null;
+                                        map[j][i+k] = mark;
+                                        return true;
+                                    }
+                                    else{
+                                        map[j][i].AmountInsertDecreace();
+                                        map[j][i] = null;
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                break;
+            case "l":
+                for(int c=0;c<4;c++){
+                    if((movement[c][0]==i-k)&&(movement[c][1]==j)){
+                        if(map[j][i-k]==null){
+                            map[j][i] = null;
+                            map[j][i-k] = mark;
+                            return true;
+                        }
+                        else{
+                            if(mark.getOwner()==map[j][i-k].getOwner()){
+                                break;
+                            }
+                            else{
+                                if(mark.getScore()==map[j][i-k].getScore()){
+                                    map[j][i].AmountInsertDecreace();
+                                    map[j][i-k].AmountInsertDecreace();
+                                    map[j][i] = null;
+                                    map[j][i-k] = null;
+                                    return true;
+                                }
+                                else{
+                                    if(mark.attack(map[j][i-k])){
+                                        map[j][i-k].AmountInsertDecreace();
+                                        map[j][i] = null;
+                                        map[j][i-k] = mark;
+                                        return true;
+                                    }
+                                    else{
+                                        map[j][i].AmountInsertDecreace();
+                                        map[j][i] = null;
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+                break;
+
+            default:
+                break;
+        }
+        System.out.println("Movement is not true");
+        return false;
+    }
     public void movement(){
         boolean cunt = false;
         while(!cunt){
@@ -754,10 +966,27 @@ public class table {
             System.out.println("enter width: ");
             int j = sc.nextInt();
             j--;
-            System.out.println("enter u or b or r or l: ");
-            String u = sc.next();
 
-            cunt = this.movePiecePlayer(i,j,u);
+            if(map[j][i].getName() == "scout"){
+                System.out.println("enter u or b or r or l: ");
+                String u = sc.next();
+
+                System.out.println("enter move amount for scout: ");
+                int k = sc.nextInt();
+
+                cunt = this.moveScout(i,j,u,k);
+
+            }
+            else{
+                System.out.println("enter u or b or r or l: ");
+                String u = sc.next();
+
+
+                cunt = this.movePiecePlayer(i,j,u);
+
+            }
+
+
             if(cunt){
                 System.out.println("succses");
             }
@@ -765,7 +994,6 @@ public class table {
         }
 
     }
-
     public void game(String name){
         player bot = this.layoutBot();
         player ply = this.layoutPlayerCustom(name);
@@ -784,23 +1012,50 @@ public class table {
         }
 
     }
-
-
-
-
     public static void main(String args[]){
+        int chose;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("wellcome in game ");
+        System.out.println("Menu:");
 
-        player ply = new player("Taha");
+        System.out.println("1.layout Pieces and save txt");
+        System.out.println("2.load layout");
+        System.out.println("3.play game");
+
+        chose = sc.nextInt();
+
+
         table str = new table(10,10);
 
+        str.layoutPlayerCustom("taha");
 
-
-        str.game("Taha");
+        str.layoutFromFile("StrategoMap.txt");
         str.printmap();
+
+
+//        switch (chose){
+//            case 1:
+//                System.out.println("enter your name :");
+//                String name = sc.next();
+//                player ply = new player(name);
+//                str.layoutPlayer(ply);
+//                break;
+//            case 2:
+//                break;
+//            case 3:
+//                break;
+//        }
+
+
+
+
+
+
+//        str.game("Taha");
+//        str.printmap();
 
 
 
 
     }
-
 }

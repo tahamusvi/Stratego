@@ -4,4 +4,8 @@ public class player {
     public player(String name){
         this.name = name;
     }
+
+    public String toString(){
+        return name;
+    }
 }

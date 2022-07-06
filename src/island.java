@@ -1,7 +1,7 @@
 public class island extends piece{
     public island(player ply){
         super(ply);
-        this.setName("island");
+        this.setName("Sea");
         this.setAmount(1);
         this.setScore(13);
     }

@@ -7,12 +7,19 @@ public class flag extends piece {
     }
 
     public boolean attack(piece markPiece) {
-        if (this.getScore() > markPiece.getScore()) {
-            return true;
-        } else {
-            return false;
+        return false;
+
+    }
+
+    public int[][] canMove(int i,int j){
+//        for flag cant move
+        int[][] temp = new int[4][2];
+        for(int u = 0;u<4;u++){
+            temp[u][0] = -2;
+            temp[u][1] = 1;
         }
 
+        return temp;
     }
 
 }

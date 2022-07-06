@@ -7,10 +7,15 @@ public class spy extends piece {
     }
 
     public boolean attack(piece markPiece) {
-        if (this.getScore() > markPiece.getScore()) {
+        if(markPiece.getName()=="marshal"){
             return true;
-        } else {
-            return false;
+        }
+        else{
+            if (this.getScore() > markPiece.getScore()) {
+                return true;
+            } else {
+                return false;
+            }
         }
 
     }
