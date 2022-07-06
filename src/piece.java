@@ -61,6 +61,45 @@ public abstract class piece {
         }
 
 
+        for(int u=0;u<4;u++){
+            if((canMoves[u][0]==2)){
+                if(canMoves[u][1]==5){
+                    canMoves[u][0] = -2;
+                }
+                if(canMoves[u][1]==4){
+                    canMoves[u][0] = -2;
+                }
+            }
+            if((canMoves[u][0]==3)){
+                if(canMoves[u][1]==5){
+                    canMoves[u][0] = -2;
+                }
+                if(canMoves[u][1]==4){
+                    canMoves[u][0] = -2;
+                }
+            }
+            if((canMoves[u][0]==6)){
+                if(canMoves[u][1]==5){
+                    canMoves[u][0] = -2;
+                }
+                if(canMoves[u][1]==4){
+                    canMoves[u][0] = -2;
+                }
+            }
+            if((canMoves[u][0]==7)){
+                if(canMoves[u][1]==5){
+                    canMoves[u][0] = -2;
+                }
+                if(canMoves[u][1]==4){
+                    canMoves[u][0] = -2;
+                }
+            }
+
+        }
+
+
+
+
         return canMoves;
     }
 

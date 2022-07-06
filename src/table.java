@@ -444,12 +444,25 @@ public class table {
     }
 
     public void printmap(){
+        piece islands = new island(new player("table"));
         for(int i =0;i<110;i++){
             this.emod();
         }
         System.out.println("");
         for(int j = 0 ; j<10;j++){
             for(int i =0;i<10;i++){
+                if(j==4){
+                    if((i==2)||(i==3)||(i==7)||(i==6)){
+                        this.ofogh(islands);
+                        continue;
+                    }
+                }
+                if(j==5){
+                    if((i==2)||(i==3)||(i==7)||(i==6)){
+                        this.ofogh(islands);
+                        continue;
+                    }
+                }
                 this.ofogh(this.map[j][i]);
             }
             System.out.println("");
@@ -565,12 +578,11 @@ public class table {
     public boolean movePiecePlayer(int i,int j, String t){
         piece mark = map[j][i];
         int[][] movement = mark.canMove(i,j);
-
         switch (t){
             case "u":
                 for(int c=0;c<4;c++){
 
-                    if((movement[c][0]==i)&&(movement[c][1]==j+1)){
+                    if((movement[c][0]==i)&&(movement[c][1]==j-1)){
                         if(map[j-1][i]==null){
                             map[j][i] = null;
                             map[j-1][i] = mark;
@@ -608,7 +620,7 @@ public class table {
                 break;
             case "b":
                 for(int c=0;c<4;c++){
-                    if((movement[c][0]==i)&&(movement[c][1]==j-1)){
+                    if((movement[c][0]==i)&&(movement[c][1]==j+1)){
                         if(map[j+1][i]==null){
                             map[j][i] = null;
                             map[j+1][i] = mark;
@@ -760,7 +772,6 @@ public class table {
         this.printmap();
 
         while((ply.pieces[11].isAlive())&&(bot.pieces[11].isAlive())){
-            System.out.println(bot.pieces[11].isAlive());
             this.movement();
             this.printmap();
         }
