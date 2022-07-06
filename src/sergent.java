@@ -1,5 +1,6 @@
 public class sergent extends piece {
-    public sergent() {
+    public sergent(player ply){
+        super(ply);
         this.setName("sergent");
         this.setAmount(4);
         this.setScore(6);

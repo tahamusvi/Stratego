@@ -1,5 +1,6 @@
 public class clonel extends piece{
-    public clonel(){
+    public clonel(player ply){
+        super(ply);
         this.setName("clonel");
         this.setAmount(2);
         this.setScore(10);

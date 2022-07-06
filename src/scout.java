@@ -1,5 +1,6 @@
 public class scout extends piece {
-    public scout() {
+    public scout(player ply){
+        super(ply);
         this.setName("scout");
         this.setAmount(8);
         this.setScore(4);

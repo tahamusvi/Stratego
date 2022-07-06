@@ -1,5 +1,6 @@
 public class flag extends piece {
-    public flag() {
+    public flag(player ply){
+        super(ply);
         this.setName("flag");
         this.setAmount(1);
         this.setScore(0);
@@ -15,3 +16,6 @@ public class flag extends piece {
     }
 
 }
+
+
+

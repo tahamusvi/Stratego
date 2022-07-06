@@ -1,5 +1,6 @@
 public class capitan extends piece {
-    public capitan() {
+    public capitan(player ply){
+        super(ply);
         this.setName("capitan");
         this.setAmount(4);
         this.setScore(8);

@@ -1,5 +1,6 @@
 public class marshal extends piece{
-    public marshal(){
+    public marshal(player ply){
+        super(ply);
         this.setName("marshal");
         this.setAmount(1);
         this.setScore(12);

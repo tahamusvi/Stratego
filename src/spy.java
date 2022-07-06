@@ -1,5 +1,6 @@
 public class spy extends piece {
-    public spy() {
+    public spy(player ply){
+        super(ply);
         this.setName("spy");
         this.setAmount(1);
         this.setScore(3);

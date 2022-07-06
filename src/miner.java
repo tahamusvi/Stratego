@@ -1,5 +1,6 @@
 public class miner extends piece {
-    public miner() {
+    public miner(player ply){
+        super(ply);
         this.setName("miner");
         this.setAmount(5);
         this.setScore(5);

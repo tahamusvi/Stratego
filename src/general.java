@@ -1,5 +1,6 @@
 public class general extends piece {
-    public general(){
+    public general(player ply){
+        super(ply);
         this.setName("general");
         this.setAmount(1);
         this.setScore(11);

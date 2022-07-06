@@ -1,5 +1,6 @@
 public class bomb extends piece {
-    public bomb() {
+    public bomb(player ply){
+        super(ply);
         this.setName("bomb");
         this.setAmount(6);
         this.setScore(2);

@@ -1,5 +1,6 @@
 public class lieutenant extends piece {
-    public lieutenant() {
+    public lieutenant(player ply){
+        super(ply);
         this.setName("lieutenant");
         this.setAmount(4);
         this.setScore(7);

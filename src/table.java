@@ -62,25 +62,31 @@ public class table {
         return i ;
     }
 
-    public void game(){
+    public piece[] piecesForPlayer(player ply){
+        piece[] pieces = new piece[12];
+
+        pieces[0] = new marshal(ply);
+        pieces[1] = new general(ply);
+        pieces[2] = new clonel(ply);
+        pieces[3] = new major(ply);
+        pieces[4] = new capitan(ply);
+        pieces[5] = new lieutenant(ply);
+        pieces[6] = new sergent(ply);
+        pieces[7] = new miner(ply);
+        pieces[8] = new scout(ply);
+        pieces[9] = new spy(ply);
+        pieces[10] = new bomb(ply);
+        pieces[11] = new flag(ply);
+        ply.pieces = pieces;
+        return pieces;
+    }
+
+    public void layoutPlayer(player ply){
         System.out.println("Start Game: ");
         int insPiece = 0 ;
         System.out.println("Pieces: ");
 
-        piece[] pieces = new piece[12];
-
-        pieces[0] = new marshal();
-        pieces[1] = new general();
-        pieces[2] = new clonel();
-        pieces[3] = new major();
-        pieces[4] = new capitan();
-        pieces[5] = new lieutenant();
-        pieces[6] = new sergent();
-        pieces[7] = new miner();
-        pieces[8] = new scout();
-        pieces[9] = new spy();
-        pieces[10] = new bomb();
-        pieces[11] = new flag();
+        piece[] pieces = this.piecesForPlayer(ply);
 
         boolean cunt = true;
 
@@ -454,14 +460,331 @@ public class table {
         }
     }
 
+    public player layoutBot(){
+        player bot = new player("bot");
+        piece[] pieces = this.piecesForPlayer(bot);
+
+        this.insertPiece(0,0,pieces[6]);
+        this.insertPiece(1,0,pieces[10]);
+        this.insertPiece(2,0,pieces[7]);
+        this.insertPiece(3,0,pieces[7]);
+        this.insertPiece(4,0,pieces[10]);
+        this.insertPiece(5,0,pieces[7]);
+        this.insertPiece(6,0,pieces[11]);
+        this.insertPiece(7,0,pieces[7]);
+        this.insertPiece(8,0,pieces[10]);
+        this.insertPiece(9,0,pieces[6]);
+
+        this.insertPiece(0,1,pieces[10]);
+        this.insertPiece(1,1,pieces[4]);
+        this.insertPiece(2,1,pieces[3]);
+        this.insertPiece(3,1,pieces[10]);
+        this.insertPiece(4,1,pieces[7]);
+        this.insertPiece(5,1,pieces[3]);
+        this.insertPiece(6,1,pieces[3]);
+        this.insertPiece(7,1,pieces[4]);
+        this.insertPiece(8,1,pieces[8]);
+        this.insertPiece(9,1,pieces[10]);
+
+        this.insertPiece(0,2,pieces[8]);
+        this.insertPiece(1,2,pieces[5]);
+        this.insertPiece(2,2,pieces[2]);
+        this.insertPiece(3,2,pieces[9]);
+        this.insertPiece(4,2,pieces[8]);
+        this.insertPiece(5,2,pieces[8]);
+        this.insertPiece(6,2,pieces[2]);
+        this.insertPiece(7,2,pieces[8]);
+        this.insertPiece(8,2,pieces[5]);
+        this.insertPiece(9,2,pieces[8]);
+
+        this.insertPiece(0,3,pieces[5]);
+        this.insertPiece(1,3,pieces[6]);
+        this.insertPiece(2,3,pieces[4]);
+        this.insertPiece(3,3,pieces[1]);
+        this.insertPiece(4,3,pieces[8]);
+        this.insertPiece(5,3,pieces[8]);
+        this.insertPiece(6,3,pieces[0]);
+        this.insertPiece(7,3,pieces[4]);
+        this.insertPiece(8,3,pieces[6]);
+        this.insertPiece(9,3,pieces[5]);
+
+        return bot;
+    }
+
+    public player layoutPlayerCustom(String name){
+        player ply = new player(name);
+        piece[] pieces = this.piecesForPlayer(ply);
+
+        this.insertPiece(0,9,pieces[6]);
+        this.insertPiece(1,9,pieces[10]);
+        this.insertPiece(2,9,pieces[7]);
+        this.insertPiece(3,9,pieces[7]);
+        this.insertPiece(4,9,pieces[10]);
+        this.insertPiece(5,9,pieces[7]);
+        this.insertPiece(6,9,pieces[11]);
+        this.insertPiece(7,9,pieces[7]);
+        this.insertPiece(8,9,pieces[10]);
+        this.insertPiece(9,9,pieces[6]);
+
+        this.insertPiece(0,8,pieces[10]);
+        this.insertPiece(1,8,pieces[4]);
+        this.insertPiece(2,8,pieces[3]);
+        this.insertPiece(3,8,pieces[10]);
+        this.insertPiece(4,8,pieces[7]);
+        this.insertPiece(5,8,pieces[3]);
+        this.insertPiece(6,8,pieces[3]);
+        this.insertPiece(7,8,pieces[4]);
+        this.insertPiece(8,8,pieces[8]);
+        this.insertPiece(9,8,pieces[10]);
+
+        this.insertPiece(0,7,pieces[8]);
+        this.insertPiece(1,7,pieces[5]);
+        this.insertPiece(2,7,pieces[2]);
+        this.insertPiece(3,7,pieces[9]);
+        this.insertPiece(4,7,pieces[8]);
+        this.insertPiece(5,7,pieces[8]);
+        this.insertPiece(6,7,pieces[2]);
+        this.insertPiece(7,7,pieces[8]);
+        this.insertPiece(8,7,pieces[5]);
+        this.insertPiece(9,7,pieces[8]);
+
+        this.insertPiece(0,6,pieces[5]);
+        this.insertPiece(1,6,pieces[6]);
+        this.insertPiece(2,6,pieces[4]);
+        this.insertPiece(3,6,pieces[1]);
+        this.insertPiece(4,6,pieces[8]);
+        this.insertPiece(5,6,pieces[8]);
+        this.insertPiece(6,6,pieces[0]);
+        this.insertPiece(7,6,pieces[4]);
+        this.insertPiece(8,6,pieces[6]);
+        this.insertPiece(9,6,pieces[5]);
+
+        return ply;
+    }
+
+    public boolean movePiecePlayer(int i,int j, String t){
+        piece mark = map[j][i];
+        int[][] movement = mark.canMove(i,j);
+
+        switch (t){
+            case "u":
+                for(int c=0;c<4;c++){
+
+                    if((movement[c][0]==i)&&(movement[c][1]==j+1)){
+                        if(map[j-1][i]==null){
+                            map[j][i] = null;
+                            map[j-1][i] = mark;
+                            return true;
+                        }
+                        else{
+                            if(mark.getOwner()==map[j-1][i].getOwner()){
+                                break;
+                            }
+                            else{
+                                if(mark.getScore()==map[j-1][i].getScore()){
+                                    map[j][i].AmountInsertDecreace();
+                                    map[j-1][i].AmountInsertDecreace();
+                                    map[j][i] = null;
+                                    map[j-1][i] = null;
+                                    return true;
+                                }
+                                else{
+                                    if(mark.attack(map[j-1][i])){
+                                        map[j-1][i].AmountInsertDecreace();
+                                        map[j][i] = null;
+                                        map[j-1][i] = mark;
+                                        return true;
+                                    }
+                                    else{
+                                        map[j][i].AmountInsertDecreace();
+                                        map[j][i] = null;
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                break;
+            case "b":
+                for(int c=0;c<4;c++){
+                    if((movement[c][0]==i)&&(movement[c][1]==j-1)){
+                        if(map[j+1][i]==null){
+                            map[j][i] = null;
+                            map[j+1][i] = mark;
+                            return true;
+                        }
+                        else{
+                            if(mark.getOwner()==map[j+1][i].getOwner()){
+                                break;
+                            }
+                            else{
+                                if(mark.getScore()==map[j+1][i].getScore()){
+                                    map[j][i].AmountInsertDecreace();
+                                    map[j+1][i].AmountInsertDecreace();
+                                    map[j][i] = null;
+                                    map[j+1][i] = null;
+                                    return true;
+                                }
+                                else{
+                                    if(mark.attack(map[j+1][i])){
+                                        map[j+1][i].AmountInsertDecreace();
+                                        map[j][i] = null;
+                                        map[j+1][i] = mark;
+                                        return true;
+                                    }
+                                    else{
+                                        map[j][i].AmountInsertDecreace();
+                                        map[j][i] = null;
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                break;
+            case "r":
+                for(int c=0;c<4;c++){
+                    if((movement[c][0]==i+1)&&(movement[c][1]==j)){
+                        if(map[j][i+1]==null){
+                            map[j][i] = null;
+                            map[j][i+1] = mark;
+                            return true;
+                        }
+                        else{
+                            if(mark.getOwner()==map[j][i+1].getOwner()){
+                                break;
+                            }
+                            else{
+                                if(mark.getScore()==map[j][i+1].getScore()){
+                                    map[j][i].AmountInsertDecreace();
+                                    map[j][i+1].AmountInsertDecreace();
+                                    map[j][i] = null;
+                                    map[j][i+1] = null;
+                                    return true;
+                                }
+                                else{
+                                    if(mark.attack(map[j][i+1])){
+                                        map[j][i+1].AmountInsertDecreace();
+                                        map[j][i] = null;
+                                        map[j][i+1] = mark;
+                                        return true;
+                                    }
+                                    else{
+                                        map[j][i].AmountInsertDecreace();
+                                        map[j][i] = null;
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                break;
+            case "l":
+                for(int c=0;c<4;c++){
+                    if((movement[c][0]==i-1)&&(movement[c][1]==j)){
+                        if(map[j][i-1]==null){
+                            map[j][i] = null;
+                            map[j][i-1] = mark;
+                            return true;
+                        }
+                        else{
+                            if(mark.getOwner()==map[j][i-1].getOwner()){
+                                break;
+                            }
+                            else{
+                                if(mark.getScore()==map[j][i-1].getScore()){
+                                    map[j][i].AmountInsertDecreace();
+                                    map[j][i-1].AmountInsertDecreace();
+                                    map[j][i] = null;
+                                    map[j][i-1] = null;
+                                    return true;
+                                }
+                                else{
+                                    if(mark.attack(map[j][i-1])){
+                                        map[j][i-1].AmountInsertDecreace();
+                                        map[j][i] = null;
+                                        map[j][i-1] = mark;
+                                        return true;
+                                    }
+                                    else{
+                                        map[j][i].AmountInsertDecreace();
+                                        map[j][i] = null;
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+                break;
+
+            default:
+                break;
+        }
+        System.out.println("Movement is not true");
+        return false;
+    }
+
+    public void movement(){
+        boolean cunt = false;
+        while(!cunt){
+            Scanner sc = new Scanner(System.in);
+
+            System.out.println("Enter posation Piece: ");
+
+            System.out.println("enter length: ");
+            int i = sc.nextInt();
+            i--;
+            System.out.println("enter width: ");
+            int j = sc.nextInt();
+            j--;
+            System.out.println("enter u or b or r or l: ");
+            String u = sc.next();
+
+            cunt = this.movePiecePlayer(i,j,u);
+            if(cunt){
+                System.out.println("succses");
+            }
+
+        }
+
+    }
+
+    public void game(String name){
+        player bot = this.layoutBot();
+        player ply = this.layoutPlayerCustom(name);
+        this.printmap();
+
+        while((ply.pieces[11].isAlive())&&(bot.pieces[11].isAlive())){
+            System.out.println(bot.pieces[11].isAlive());
+            this.movement();
+            this.printmap();
+        }
+
+        if(ply.pieces[11].isAlive()){
+            System.out.println("player is won");
+        }
+        else{
+            System.out.println("bot is won");
+        }
+
+    }
+
+
+
+
     public static void main(String args[]){
 
-
+        player ply = new player("Taha");
         table str = new table(10,10);
-        piece mar = new marshal();
-        str.game();
-//        str.insertPiece(0,0,mar);
-//        str.insertPiece(9,9,mar);
+
+
+
+        str.game("Taha");
         str.printmap();
 
 
