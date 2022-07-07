@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Random;
 import java.util.Scanner;
 
 public class table {
@@ -109,21 +110,19 @@ public class table {
                case 1:
 //                Marshal
                    if(pieces[0].getAmount()!= pieces[0].getAmountInsert()){
-                       System.out.println("enter width:");
-                       j = this.getPositiony();
-                       System.out.println("enter length:");
-                       i = this.getPositionx();
-                       if(map[i][j] == null){
-                           this.insertPiece(i,j,pieces[0]);
-                       }
-                       else{
-                           System.out.println("IS full chose other box");
-                           System.out.println("enter width:");
-                           j = this.getPositiony();
+                       while(true){
                            System.out.println("enter length:");
                            i = this.getPositionx();
-                           this.insertPiece(i,j,pieces[0]);
+                           System.out.println("enter width:");
+                           j = this.getPositiony();
+                           i--;
+                           j--;
+                           if(map[j][i]==null){
+                               break;
+                           }
+                           System.out.println("is full this position");
                        }
+                       this.insertPiece(i,j,pieces[chose-1]);
                        break;
                    }
                    else{
@@ -134,21 +133,19 @@ public class table {
                case 2:
 //                General
                    if(pieces[1].getAmount()!= pieces[1].getAmountInsert()){
-                       System.out.println("enter width:");
-                       j = this.getPositiony();
-                       System.out.println("enter length:");
-                       i = this.getPositionx();
-                       if(map[i][j] == null){
-                           this.insertPiece(i,j,pieces[1]);
-                       }
-                       else{
-                           System.out.println("IS full chose other box");
-                           System.out.println("enter width:");
-                           j = this.getPositiony();
+                       while(true){
                            System.out.println("enter length:");
                            i = this.getPositionx();
-                           this.insertPiece(i,j,pieces[1]);
+                           System.out.println("enter width:");
+                           j = this.getPositiony();
+                           i--;
+                           j--;
+                           if(map[j][i]==null){
+                               break;
+                           }
+                           System.out.println("is full this position");
                        }
+                       this.insertPiece(i,j,pieces[chose-1]);
                        break;
                    }
                    else{
@@ -158,21 +155,19 @@ public class table {
                case 3:
 //                Clonel
                    if(pieces[2].getAmount()!= pieces[2].getAmountInsert()){
-                       System.out.println("enter width:");
-                       j = this.getPositiony();
-                       System.out.println("enter length:");
-                       i = this.getPositionx();
-                       if(map[i][j] == null){
-                           this.insertPiece(i,j,pieces[2]);
-                       }
-                       else{
-                           System.out.println("IS full chose other box");
-                           System.out.println("enter width:");
-                           j = this.getPositiony();
+                       while(true){
                            System.out.println("enter length:");
                            i = this.getPositionx();
-                           this.insertPiece(i,j,pieces[2]);
+                           System.out.println("enter width:");
+                           j = this.getPositiony();
+                           i--;
+                           j--;
+                           if(map[j][i]==null){
+                               break;
+                           }
+                           System.out.println("is full this position");
                        }
+                       this.insertPiece(i,j,pieces[chose-1]);
                        break;
                    }
                    else{
@@ -182,21 +177,19 @@ public class table {
                case 4:
 //                Major
                    if(pieces[3].getAmount()!= pieces[3].getAmountInsert()){
-                       System.out.println("enter width:");
-                       j = this.getPositiony();
-                       System.out.println("enter length:");
-                       i = this.getPositionx();
-                       if(map[i][j] == null){
-                           this.insertPiece(i,j,pieces[3]);
-                       }
-                       else{
-                           System.out.println("IS full chose other box");
-                           System.out.println("enter width:");
-                           j = this.getPositiony();
+                       while(true){
                            System.out.println("enter length:");
                            i = this.getPositionx();
-                           this.insertPiece(i,j,pieces[3]);
+                           System.out.println("enter width:");
+                           j = this.getPositiony();
+                           i--;
+                           j--;
+                           if(map[j][i]==null){
+                               break;
+                           }
+                           System.out.println("is full this position");
                        }
+                       this.insertPiece(i,j,pieces[chose-1]);
                        break;
                    }
                    else{
@@ -206,21 +199,19 @@ public class table {
                case 5:
 //                Capitan
                    if(pieces[4].getAmount()!= pieces[4].getAmountInsert()){
-                       System.out.println("enter width:");
-                       j = this.getPositiony();
-                       System.out.println("enter length:");
-                       i = this.getPositionx();
-                       if(map[i][j] == null){
-                           this.insertPiece(i,j,pieces[4]);
-                       }
-                       else{
-                           System.out.println("IS full chose other box");
-                           System.out.println("enter width:");
-                           j = this.getPositiony();
+                       while(true){
                            System.out.println("enter length:");
                            i = this.getPositionx();
-                           this.insertPiece(i,j,pieces[4]);
+                           System.out.println("enter width:");
+                           j = this.getPositiony();
+                           i--;
+                           j--;
+                           if(map[j][i]==null){
+                               break;
+                           }
+                           System.out.println("is full this position");
                        }
+                       this.insertPiece(i,j,pieces[chose-1]);
                        break;
                    }
                    else{
@@ -230,21 +221,19 @@ public class table {
                case 6:
 //                Lieutenant
                    if(pieces[5].getAmount()!= pieces[5].getAmountInsert()){
-                       System.out.println("enter width:");
-                       j = this.getPositiony();
-                       System.out.println("enter length:");
-                       i = this.getPositionx();
-                       if(map[i][j] == null){
-                           this.insertPiece(i,j,pieces[5]);
-                       }
-                       else{
-                           System.out.println("IS full chose other box");
-                           System.out.println("enter width:");
-                           j = this.getPositiony();
+                       while(true){
                            System.out.println("enter length:");
                            i = this.getPositionx();
-                           this.insertPiece(i,j,pieces[5]);
+                           System.out.println("enter width:");
+                           j = this.getPositiony();
+                           i--;
+                           j--;
+                           if(map[j][i]==null){
+                               break;
+                           }
+                           System.out.println("is full this position");
                        }
+                       this.insertPiece(i,j,pieces[chose-1]);
                        break;
                    }
                    else{
@@ -254,21 +243,19 @@ public class table {
                case 7:
 //                Sergent
                    if(pieces[6].getAmount()!= pieces[6].getAmountInsert()){
-                       System.out.println("enter width:");
-                       j = this.getPositiony();
-                       System.out.println("enter length:");
-                       i = this.getPositionx();
-                       if(map[i][j] == null){
-                           this.insertPiece(i,j,pieces[6]);
-                       }
-                       else{
-                           System.out.println("IS full chose other box");
-                           System.out.println("enter width:");
-                           j = this.getPositiony();
+                       while(true){
                            System.out.println("enter length:");
                            i = this.getPositionx();
-                           this.insertPiece(i,j,pieces[6]);
+                           System.out.println("enter width:");
+                           j = this.getPositiony();
+                           i--;
+                           j--;
+                           if(map[j][i]==null){
+                               break;
+                           }
+                           System.out.println("is full this position");
                        }
+                       this.insertPiece(i,j,pieces[chose-1]);
                        break;
                    }
                    else{
@@ -278,21 +265,19 @@ public class table {
                case 8:
 //                Miner
                    if(pieces[7].getAmount()!= pieces[7].getAmountInsert()){
-                       System.out.println("enter width:");
-                       j = this.getPositiony();
-                       System.out.println("enter length:");
-                       i = this.getPositionx();
-                       if(map[i][j] == null){
-                           this.insertPiece(i,j,pieces[7]);
-                       }
-                       else{
-                           System.out.println("IS full chose other box");
-                           System.out.println("enter width:");
-                           j = this.getPositiony();
+                       while(true){
                            System.out.println("enter length:");
                            i = this.getPositionx();
-                           this.insertPiece(i,j,pieces[7]);
+                           System.out.println("enter width:");
+                           j = this.getPositiony();
+                           i--;
+                           j--;
+                           if(map[j][i]==null){
+                               break;
+                           }
+                           System.out.println("is full this position");
                        }
+                       this.insertPiece(i,j,pieces[chose-1]);
                        break;
                    }
                    else{
@@ -302,21 +287,19 @@ public class table {
                case 9:
 //                Scout
                    if(pieces[8].getAmount()!= pieces[8].getAmountInsert()){
-                       System.out.println("enter width:");
-                       j = this.getPositiony();
-                       System.out.println("enter length:");
-                       i = this.getPositionx();
-                       if(map[i][j] == null){
-                           this.insertPiece(i,j,pieces[8]);
-                       }
-                       else{
-                           System.out.println("IS full chose other box");
-                           System.out.println("enter width:");
-                           j = this.getPositiony();
+                       while(true){
                            System.out.println("enter length:");
                            i = this.getPositionx();
-                           this.insertPiece(i,j,pieces[8]);
+                           System.out.println("enter width:");
+                           j = this.getPositiony();
+                           i--;
+                           j--;
+                           if(map[j][i]==null){
+                               break;
+                           }
+                           System.out.println("is full this position");
                        }
+                       this.insertPiece(i,j,pieces[chose-1]);
                        break;
                    }
                    else{
@@ -326,21 +309,19 @@ public class table {
                case 10:
 //                Spy
                    if(pieces[9].getAmount()!= pieces[9].getAmountInsert()){
-                       System.out.println("enter width:");
-                       j = this.getPositiony();
-                       System.out.println("enter length:");
-                       i = this.getPositionx();
-                       if(map[i][j] == null){
-                           this.insertPiece(i,j,pieces[9]);
-                       }
-                       else{
-                           System.out.println("IS full chose other box");
-                           System.out.println("enter width:");
-                           j = this.getPositiony();
+                       while(true){
                            System.out.println("enter length:");
                            i = this.getPositionx();
-                           this.insertPiece(i,j,pieces[9]);
+                           System.out.println("enter width:");
+                           j = this.getPositiony();
+                           i--;
+                           j--;
+                           if(map[j][i]==null){
+                               break;
+                           }
+                           System.out.println("is full this position");
                        }
+                       this.insertPiece(i,j,pieces[chose-1]);
                        break;
                    }
                    else{
@@ -350,21 +331,19 @@ public class table {
                case 11:
 //                Bomb
                    if(pieces[10].getAmount()!= pieces[10].getAmountInsert()){
-                       System.out.println("enter width:");
-                       j = this.getPositiony();
-                       System.out.println("enter length:");
-                       i = this.getPositionx();
-                       if(map[i][j] == null){
-                           this.insertPiece(i,j,pieces[10]);
-                       }
-                       else{
-                           System.out.println("IS full chose other box");
-                           System.out.println("enter width:");
-                           j = this.getPositiony();
+                       while(true){
                            System.out.println("enter length:");
                            i = this.getPositionx();
-                           this.insertPiece(i,j,pieces[10]);
+                           System.out.println("enter width:");
+                           j = this.getPositiony();
+                           i--;
+                           j--;
+                           if(map[j][i]==null){
+                               break;
+                           }
+                           System.out.println("is full this position");
                        }
+                       this.insertPiece(i,j,pieces[chose-1]);
                        break;
                    }
                    else{
@@ -374,21 +353,19 @@ public class table {
                case 12:
 //                Flag
                    if(pieces[11].getAmount()!= pieces[11].getAmountInsert()){
-                       System.out.println("enter width:");
-                       j = this.getPositiony();
-                       System.out.println("enter length:");
-                       i = this.getPositionx();
-                       if(map[i][j] == null){
-                           this.insertPiece(i,j,pieces[11]);
-                       }
-                       else{
-                           System.out.println("IS full chose other box");
-                           System.out.println("enter width:");
-                           j = this.getPositiony();
+                       while(true){
                            System.out.println("enter length:");
                            i = this.getPositionx();
-                           this.insertPiece(i,j,pieces[11]);
+                           System.out.println("enter width:");
+                           j = this.getPositiony();
+                           i--;
+                           j--;
+                           if(map[j][i]==null){
+                               break;
+                           }
+                           System.out.println("is full this position");
                        }
+                       this.insertPiece(i,j,pieces[chose-1]);
                        break;
                    }
                    else{
@@ -431,8 +408,7 @@ public class table {
             ex.printStackTrace();
         }
     }
-
-    public void layoutFromFile(String fileName){
+    public player layoutFromFile(String fileName){
         player ply = new player("palyer 1");
         piece[] pieces = this.piecesForPlayer(ply);
         String line = null;
@@ -452,15 +428,17 @@ public class table {
 
                     }
                 }
-                map[Integer.valueOf(array[2])][Integer.valueOf(array[1])] = mark;
+                this.insertPiece(Integer.valueOf(array[1]),Integer.valueOf(array[2]),mark);
             }
 
             br.close();
+            return ply;
 
         }
         catch(IOException e) {
             e.printStackTrace();
         }
+        return ply;
     }
     public boolean insertPiece(int length,int width,piece newPiece){
         map[width][length] = newPiece;
@@ -994,13 +972,13 @@ public class table {
         }
 
     }
-    public void game(String name){
+    public void gameAfterlayoutFile(player ply){
         player bot = this.layoutBot();
-        player ply = this.layoutPlayerCustom(name);
         this.printmap();
 
         while((ply.pieces[11].isAlive())&&(bot.pieces[11].isAlive())){
             this.movement();
+            this.botMove();
             this.printmap();
         }
 
@@ -1012,6 +990,58 @@ public class table {
         }
 
     }
+    public void game(String name){
+        player bot = this.layoutBot();
+        player ply = this.layoutPlayerCustom(name);
+        this.printmap();
+
+        while((ply.pieces[11].isAlive())&&(bot.pieces[11].isAlive())){
+            this.movement();
+            this.botMove();
+            this.printmap();
+        }
+
+        if(ply.pieces[11].isAlive()){
+            System.out.println("player is won");
+        }
+        else{
+            System.out.println("bot is won");
+        }
+
+    }
+
+    public boolean botMove(){
+        Random rn = new Random();
+        int i = 0;
+        int j = 0;
+        int k =0;
+        String l= "u" ;
+        boolean cunt = false;
+        while(!cunt){
+            i = rn.nextInt(0,9);
+            j = rn.nextInt(0,4);
+            k = rn.nextInt(0,4);
+            switch (k){
+                case 0:
+                    l = "u";
+                    break;
+                case 1:
+                    l = "b";
+                    break;
+                case 2:
+                    l = "r";
+                    break;
+                case 3:
+                    l = "l";
+                    break;
+            }
+            if(map[j][i]!=null){
+                cunt = movePiecePlayer(i,j,l);
+            }
+        }
+
+        return true;
+    }
     public static void main(String args[]){
         int chose;
         Scanner sc = new Scanner(System.in);
@@ -1020,39 +1050,34 @@ public class table {
 
         System.out.println("1.layout Pieces and save txt");
         System.out.println("2.load layout");
-        System.out.println("3.play game");
+        System.out.println("3.play game random");
 
         chose = sc.nextInt();
 
 
         table str = new table(10,10);
 
-        str.layoutPlayerCustom("taha");
 
-        str.layoutFromFile("StrategoMap.txt");
-        str.printmap();
-
-
-//        switch (chose){
-//            case 1:
-//                System.out.println("enter your name :");
-//                String name = sc.next();
-//                player ply = new player(name);
-//                str.layoutPlayer(ply);
-//                break;
-//            case 2:
-//                break;
-//            case 3:
-//                break;
-//        }
-
-
-
-
-
-
-//        str.game("Taha");
-//        str.printmap();
+        switch (chose){
+            case 1:
+                System.out.println("enter your name :");
+                String name = sc.next();
+                player ply = new player(name);
+                str.layoutPlayer(ply);
+                str.writeTxt();
+                break;
+            case 2:
+                System.out.println("enter your file name :");
+                String ad = sc.next();
+                player ply2 = str.layoutFromFile(ad);
+                str.gameAfterlayoutFile(ply2);
+                break;
+            case 3:
+                System.out.println("enter your name :");
+                String name2 = sc.next();
+                str.game(name2);
+                break;
+        }
 
 
 
