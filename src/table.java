@@ -1,3 +1,6 @@
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
@@ -6,6 +9,38 @@ public class table {
     private int width = 1;
     private int length = 1;
     private piece[][] map ;
+    public boolean botMove(){
+        Random rn = new Random();
+        int i = 0;
+        int j = 0;
+        int k =0;
+        String l= "u" ;
+        boolean cunt = false;
+        while(!cunt){
+            i = rn.nextInt(0,9);
+            j = rn.nextInt(0,4);
+            k = rn.nextInt(0,4);
+            switch (k){
+                case 0:
+                    l = "u";
+                    break;
+                case 1:
+                    l = "b";
+                    break;
+                case 2:
+                    l = "r";
+                    break;
+                case 3:
+                    l = "l";
+                    break;
+            }
+            if(map[j][i]!=null){
+                cunt = movePiecePlayer(i,j,l);
+            }
+        }
+
+        return true;
+    }
     public table(int width,int length){
         setLength(length);
         setWidth(width);
@@ -759,7 +794,7 @@ public class table {
             default:
                 break;
         }
-        System.out.println("Movement is not true");
+//        System.out.println("Movement is not true");
         return false;
     }
     public boolean moveScout(int i,int j,String t ,int k){
@@ -1009,78 +1044,248 @@ public class table {
         }
 
     }
+    public void gameGUI(String name){
+        player bot = this.layoutBot();
+        player ply = this.layoutPlayerCustom(name);
+        this.printGUI();
 
-    public boolean botMove(){
-        Random rn = new Random();
-        int i = 0;
-        int j = 0;
-        int k =0;
-        String l= "u" ;
-        boolean cunt = false;
-        while(!cunt){
-            i = rn.nextInt(0,9);
-            j = rn.nextInt(0,4);
-            k = rn.nextInt(0,4);
-            switch (k){
-                case 0:
-                    l = "u";
-                    break;
-                case 1:
-                    l = "b";
-                    break;
-                case 2:
-                    l = "r";
-                    break;
-                case 3:
-                    l = "l";
-                    break;
-            }
-            if(map[j][i]!=null){
-                cunt = movePiecePlayer(i,j,l);
+        while((ply.pieces[11].isAlive())&&(bot.pieces[11].isAlive())){
+            this.movement();
+            this.botMove();
+            this.printGUI();
+        }
+
+        if(ply.pieces[11].isAlive()){
+            System.out.println("player is won");
+        }
+        else{
+            System.out.println("bot is won");
+        }
+
+    }
+    public void printGUI(){
+        JFrame f = new JFrame("Label Example");
+
+        ImageIcon[] imageRed = new ImageIcon[13];
+        imageRed[0] = new ImageIcon("image/mar2.gif");
+        imageRed[1] = new ImageIcon("image/gen2.gif");
+        imageRed[2] = new ImageIcon("image/col2.gif");
+        imageRed[3] = new ImageIcon("image/maj2.gif");
+        imageRed[4] = new ImageIcon("image/cap2.gif");
+        imageRed[5] = new ImageIcon("image/lie2.gif");
+        imageRed[6] = new ImageIcon("image/ser2.gif");
+        imageRed[7] = new ImageIcon("image/min2.gif");
+        imageRed[8] = new ImageIcon("image/sco2.gif");
+        imageRed[9] = new ImageIcon("image/spy2.gif");
+        imageRed[10] = new ImageIcon("image/bomb2.gif");
+        imageRed[11] = new ImageIcon("image/flag2.gif");
+        imageRed[12] = new ImageIcon("image/un2.gif");
+
+
+//        ImageIcon[] imageBlue = new ImageIcon[13];
+//        imageBlue[0] = new ImageIcon("image/mar1.gif");
+//        imageBlue[1] = new ImageIcon("image/gen1.gif");
+//        imageBlue[2] = new ImageIcon("image/clo1.gif");
+//        imageBlue[3] = new ImageIcon("image/maj1.gif");
+//        imageBlue[4] = new ImageIcon("image/cap1.gif");
+//        imageBlue[5] = new ImageIcon("image/lie1.gif");
+//        imageBlue[6] = new ImageIcon("image/ser1.gif");
+//        imageBlue[7] = new ImageIcon("image/min1.gif");
+//        imageBlue[8] = new ImageIcon("image/sco1.gif");
+//        imageBlue[9] = new ImageIcon("image/spy1.gif");
+//        imageBlue[10] = new ImageIcon("image/bomb1.gif");
+//        imageBlue[11] = new ImageIcon("image/flag1.gif");
+//        imageBlue[12] = new ImageIcon("image/un1.gif");
+
+        ImageIcon blueUn = new ImageIcon("image/un1.gif");
+        ImageIcon Sea = new ImageIcon("image/lake.jpg");
+
+//        JLabel j1;
+        ImageIcon temp;
+        JButton j1 =new JButton(Sea) ;
+
+
+
+        for(int j=0;j<10;j++){
+            for(int i=0;i<10;i++){
+
+                if(j==4){
+                    if((i==2)||(i==3)||(i==7)||(i==6)){
+                        j1 = new JButton(Sea);
+                        j1.setBounds(i*50,j*50,49,49);
+                        f.add(j1);
+                        continue;
+                    }
+                }
+                if(j==5){
+                    if((i==2)||(i==3)||(i==7)||(i==6)){
+                        j1 = new JButton(Sea);
+                        j1.setBounds(i*50,j*50,49,49);
+                        f.add(j1);
+                        continue;
+                    }
+                }
+
+
+                if(map[j][i] != null){
+                    switch (map[j][i].getName()){
+                        case "marshal":
+                            if(map[j][i].getOwner().name.equals("bot")){
+                                temp = blueUn;
+                            }
+                            else{
+                                temp = imageRed[0];
+                            }
+                            j1 = new JButton(temp);
+                            j1.setBounds(i*50,j*50,49,49);
+                            f.add(j1);
+                            break;
+
+                        case "general":
+                            if(map[j][i].getOwner().name.equals("bot")){
+                                temp = blueUn;
+                            }
+                            else{
+                                temp = imageRed[1];
+                            }
+                            j1 = new JButton(temp);
+                            j1.setBounds(i*50,j*50,49,49);
+                            f.add(j1);
+                            break;
+
+                        case "clonel":
+                            if(map[j][i].getOwner().name.equals("bot")){
+                                temp = blueUn;
+                            }
+                            else{
+                                temp = imageRed[2];
+                            }
+                            j1 = new JButton(temp);
+                            j1.setBounds(i*50,j*50,49,49);
+                            f.add(j1);
+                            break;
+
+                        case "major":
+                            if(map[j][i].getOwner().name.equals("bot")){
+                                temp = blueUn;
+                            }
+                            else{
+                                temp = imageRed[3];
+                            }
+                            j1 = new JButton(temp);
+                            j1.setBounds(i*50,j*50,49,49);
+                            f.add(j1);
+                            break;
+
+                        case "capitan":
+                            if(map[j][i].getOwner().name.equals("bot")){
+                                temp = blueUn;
+                            }
+                            else{
+                                temp = imageRed[4];
+                            }
+                            j1 = new JButton(temp);
+                            j1.setBounds(i*50,j*50,49,49);
+                            f.add(j1);
+                            break;
+
+                        case "lieutenant":
+                            if(map[j][i].getOwner().name.equals("bot")){
+                                temp = blueUn;
+                            }
+                            else{
+                                temp = imageRed[5];
+                            }
+                            j1 = new JButton(temp);
+                            j1.setBounds(i*50,j*50,49,49);
+                            f.add(j1);
+                            break;
+
+                        case "sergent":
+                            if(map[j][i].getOwner().name.equals("bot")){
+                                temp = blueUn;
+                            }
+                            else{
+                                temp = imageRed[6];
+                            }
+                            j1 = new JButton(temp);
+                            j1.setBounds(i*50,j*50,49,49);
+                            f.add(j1);
+                            break;
+
+                        case "miner":
+                            if(map[j][i].getOwner().name.equals("bot")){
+                                temp = blueUn;
+                            }
+                            else{
+                                temp = imageRed[7];
+                            }
+                            j1 = new JButton(temp);
+                            j1.setBounds(i*50,j*50,49,49);
+                            f.add(j1);
+                            break;
+
+                        case "scout":
+                            if(map[j][i].getOwner().name.equals("bot")){
+                                temp = blueUn;
+                            }
+                            else{
+                                temp = imageRed[8];
+                            }
+                            j1 = new JButton(temp);
+                            j1.setBounds(i*50,j*50,49,49);
+                            f.add(j1);
+                            break;
+
+                        case "spy":
+                            if(map[j][i].getOwner().name.equals("bot")){
+                                temp = blueUn;
+                            }
+                            else{
+                                temp = imageRed[9];
+                            }
+                            j1 = new JButton(temp);
+                            j1.setBounds(i*50,j*50,49,49);
+                            f.add(j1);
+                            break;
+
+                        case "bomb":
+                            if(map[j][i].getOwner().name.equals("bot")){
+                                temp = blueUn;
+                            }
+                            else{
+                                temp = imageRed[10];
+                            }
+                            j1 = new JButton(temp);
+                            j1.setBounds(i*50,j*50,49,49);
+                            f.add(j1);
+                            break;
+
+                        case "flag":
+                            if(map[j][i].getOwner().name.equals("bot")){
+                                temp = blueUn;
+                            }
+                            else{
+                                temp = imageRed[11];
+                            }
+                            j1 = new JButton(temp);
+                            j1.setBounds(i*50,j*50,49,49);
+                            f.add(j1);
+                            break;
+
+                    }
+                }
             }
         }
 
-        return true;
+
+
+
+        f.setSize(600, 600);
+        f.setLayout(null);
+        f.setVisible(true);
     }
-    public static void main(String args[]){
-        int chose;
-        Scanner sc = new Scanner(System.in);
-        System.out.println("wellcome in game ");
-        System.out.println("Menu:");
-
-        System.out.println("1.layout Pieces and save txt");
-        System.out.println("2.load layout");
-        System.out.println("3.play game random");
-
-        chose = sc.nextInt();
-
-
-        table str = new table(10,10);
-
-
-        switch (chose){
-            case 1:
-                System.out.println("enter your name :");
-                String name = sc.next();
-                player ply = new player(name);
-                str.layoutPlayer(ply);
-                str.writeTxt();
-                break;
-            case 2:
-                System.out.println("enter your file name :");
-                String ad = sc.next();
-                player ply2 = str.layoutFromFile(ad);
-                str.gameAfterlayoutFile(ply2);
-                break;
-            case 3:
-                System.out.println("enter your name :");
-                String name2 = sc.next();
-                str.game(name2);
-                break;
-        }
 
 
 
-
-    }
 }
