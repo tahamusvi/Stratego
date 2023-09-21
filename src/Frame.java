@@ -10,7 +10,7 @@ public class Frame {
     	
         JFrame frame = new JFrame("STRATEGO");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new GridLayout(10, 10));
+        frame.setLayout(new GridLayout(11, 10));
         
         JButton[][] buttons = new JButton[10][10];
         
@@ -43,6 +43,11 @@ public class Frame {
             
         	}
         		}
+        JButton submitButton = new JButton("Submit");
+        submitButton.addActionListener(new ButtonClickListener());
+        frame.add(submitButton);
+
+        
         for(int i=0;i<4;i++)
         {
         	for(int j=0;j<10;j++)
@@ -52,7 +57,7 @@ public class Frame {
         }
         
        
-        frame.setSize(500, 500);
+        frame.setSize(500, 550); // تغییر ارتفاع فریم برای جایگذاری دکمه جدید
         frame.setVisible(true);
     }
 
@@ -65,8 +70,16 @@ public class Frame {
             	String value = JOptionPane.showInputDialog(null,"Please Enter the button value", JOptionPane.INFORMATION_MESSAGE);
                 button.setText(value);
             }
-            else {
-            	System.out.println("دکمه " + buttonText + " فشرده شد.");
+            else if(buttonText!="x"){
+            	int selectedmode=JOptionPane.showConfirmDialog(null,"Do you want to change the value of the button?" );
+				if(selectedmode==JOptionPane.YES_OPTION) {
+					String value = JOptionPane.showInputDialog(null,"Please Enter the button value", JOptionPane.INFORMATION_MESSAGE);
+	                button.setText(value);
+				}
+				else {
+					System.out.println("دکمه " + buttonText + " فشرده شد.");
+				}
+            	
 			}
             
         }
