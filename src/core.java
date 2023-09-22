@@ -1,6 +1,3 @@
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
@@ -31,8 +28,6 @@ public class core {
     public void setLength(int length) {
         this.length = length;
     }
-
-
 
 
 
@@ -69,11 +64,9 @@ public class core {
         return true;
     }
     
+
     
-    
-    
-    
-    public boolean canMovePiece(int i,int j){
+    public boolean WhereCanGo(int i, int j){
         piece mark = map[i][j];
         mark.canMove(i,j);
         return true;
@@ -109,12 +102,14 @@ public class core {
 
         boolean cunt = true;
 
-       while(cunt){
+        while(cunt){
            for(piece mark : pieces){
                if(mark.getAmount()!= mark.getAmountInsert()){
                    System.out.println(mark + " left :" + (mark.getAmount()-mark.getAmountInsert()));
                }
            }
+
+
            int chose=2;
            int i,j;
            Scanner sc = new Scanner(System.in);
@@ -125,21 +120,21 @@ public class core {
            for(piece mark : pieces){
                if(mark.getAmount()!= mark.getAmountInsert()){
                    System.out.println(counter + ". " + mark);
-                   counter++;
                }
-               else{
-                   counter++;
-               }
+               counter++;
            }
+
            System.out.println("enter number piece:");
            chose = sc.nextInt();
 
-           if(pieces[chose-1].getAmount()!= pieces[chose-1].getAmountInsert()){
+           if(pieces[chose-1].getAmount() != pieces[chose-1].getAmountInsert()){
                 while(true){
                     System.out.println("enter length:");
-                    i = this.getPositionx();
+//                    i = this.getPositionx();
+                    i = 0;
                     System.out.println("enter width:");
-                    j = this.getPositiony();
+//                    j = this.getPositiony();
+                    j = 0;
                     i--;
                     j--;
                     if(map[j][i]==null){
@@ -148,12 +143,10 @@ public class core {
                     System.out.println("is full this position");
                 }
                 this.insertPiece(i,j,pieces[chose-1]);
-                break;
-            }
-            else{
-                System.out.println("amount few");
-                break;
-            }
+           }
+           else{
+               System.out.println("amount few");
+           }
 
            int insertedPiece = 0;
            for(piece mark : pieces){
@@ -164,16 +157,10 @@ public class core {
            if(insertedPiece == 40){
                cunt = false;
            }
-
-           this.printmap();
-
        }
        this.writeTxt();
     }
 
-
-    
-    
 
 
     public boolean insertPiece(int length,int width,piece newPiece){
@@ -234,6 +221,7 @@ public class core {
 
         return bot;
     }
+
     public player layoutPlayerCustom(String name){
         player ply = new player(name);
         piece[] pieces = this.piecesForPlayer(ply);
@@ -569,12 +557,10 @@ public class core {
 
     public void gameAfterlayoutFile(player ply){
         player bot = this.layoutBot();
-        this.printmap();
 
         while((ply.pieces[11].isAlive())&&(bot.pieces[11].isAlive())){
             this.movement();
             this.botMove();
-            this.printmap();
         }
 
         if(ply.pieces[11].isAlive()){
@@ -585,15 +571,14 @@ public class core {
         }
 
     }
+
     public void game(String name){
         player bot = this.layoutBot();
         player ply = this.layoutPlayerCustom(name);
-        this.printmap();
 
         while((ply.pieces[11].isAlive())&&(bot.pieces[11].isAlive())){
             this.movement();
             this.botMove();
-            this.printmap();
         }
 
         if(ply.pieces[11].isAlive()){
@@ -659,9 +644,5 @@ public class core {
         }
         return ply;
     }
-
-    
-
-
 
 }
