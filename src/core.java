@@ -57,13 +57,12 @@ public class core {
                     break;
             }
             if(map[j][i]!=null){
-                cunt = movePiecePlayer(i,j,l);
+                cunt = movePiecePlayer(i,j,l,1);
             }
         }
 
         return true;
     }
-    
 
     
     public boolean WhereCanGo(int i, int j){
@@ -273,8 +272,13 @@ public class core {
         return ply;
     }
 
-    public boolean movePiecePlayer(int i,int j, String t){
+    public boolean movePiecePlayer(int i,int j, String t,int k){
         piece mark = map[j][i];
+        int count_move = 4;
+        if(mark.getName() == "scout")
+        {
+            count_move = 36;
+        }
 
         int[][] movement = mark.canMove(i,j);
         int finalI = 0;
@@ -283,25 +287,25 @@ public class core {
         switch (t){
             case "u":
                 finalI = i;
-                finalJ = j-1;
+                finalJ = j-k;
                 break;
             case "b":
                 finalI = i;
-                finalJ = j+1;
+                finalJ = j+k;
                 break;
             case "r":
-                finalI = i+1;
+                finalI = i+k;
                 finalJ = j;
                 break;
             case "l":
-                finalI = i-1;
+                finalI = i-k;
                 finalJ = j;
                 break;      
            default:
                 break;
         }
 
-        for(int c=0;c<4;c++){
+        for(int c=0;c<count_move;c++){
             if((movement[c][0]==finalI)&&(movement[c][1]==finalJ)){
                 if(map[finalJ][finalI]==null){
                     map[j][i] = null;
@@ -346,178 +350,6 @@ public class core {
     }
 
 
-    public boolean moveScout(int i,int j,String t ,int k){
-        piece mark = map[j][i];
-
-        int[][] movement = mark.canMove(i,j);
-        switch (t){
-            case "u":
-                for(int c=0;c<36;c++){
-                    if((movement[c][0]==i)&&(movement[c][1]==j-k)){
-                        if(map[j-k][i]==null){
-                            map[j][i] = null;
-                            map[j-k][i] = mark;
-                            System.out.println(mark.getOwner() +"'s " +  mark.getName() + " moved");
-                            return true;
-                        }
-                        else{
-                            if(mark.getOwner()==map[j-k][i].getOwner()){
-                                break;
-                            }
-                            else{
-                                if(mark.getScore()==map[j-k][i].getScore()){
-                                    System.out.println(mark.getOwner() +"'s " + mark.getName() + " attacked " + map[j-k][i].getName()+ " --> both removed");
-                                    map[j][i].AmountInsertDecreace();
-                                    map[j-k][i].AmountInsertDecreace();
-                                    map[j][i] = null;
-                                    map[j-k][i] = null;
-                                    return true;
-                                }
-                                else{
-                                    if(mark.attack(map[j-k][i])){
-                                        System.out.println(mark.getOwner() +"'s " +  mark.getName() + " attacked " +  map[j-k][i].getName()+ " --> "+ map[j-k][i].getName() +" removed");
-                                        map[j-k][i].AmountInsertDecreace();
-                                        map[j][i] = null;
-                                        map[j-k][i] = mark;
-                                        return true;
-                                    }
-                                    else{
-                                        System.out.println(mark.getOwner() +"'s " +  mark.getName() + " attacked " + mark.getName()+ " --> both removed");
-                                        map[j][i].AmountInsertDecreace();
-                                        map[j][i] = null;
-                                        return true;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                break;
-            case "b":
-                for(int c=0;c<36;c++){
-                    if((movement[c][0]==i)&&(movement[c][1]==j+k)){
-                        if(map[j+k][i]==null){
-                            map[j][i] = null;
-                            map[j+k][i] = mark;
-                            return true;
-                        }
-                        else{
-                            if(mark.getOwner()==map[j+k][i].getOwner()){
-                                break;
-                            }
-                            else{
-                                if(mark.getScore()==map[j+k][i].getScore()){
-                                    map[j][i].AmountInsertDecreace();
-                                    map[j+k][i].AmountInsertDecreace();
-                                    map[j][i] = null;
-                                    map[j+k][i] = null;
-                                    return true;
-                                }
-                                else{
-                                    if(mark.attack(map[j+k][i])){
-                                        map[j+k][i].AmountInsertDecreace();
-                                        map[j][i] = null;
-                                        map[j+k][i] = mark;
-                                        return true;
-                                    }
-                                    else{
-                                        map[j][i].AmountInsertDecreace();
-                                        map[j][i] = null;
-                                        return true;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                break;
-            case "r":
-                for(int c=0;c<4;c++){
-                    if((movement[c][0]==i+1)&&(movement[c][1]==j)){
-                        if(map[j][i+k]==null){
-                            map[j][i] = null;
-                            map[j][i+k] = mark;
-                            return true;
-                        }
-                        else{
-                            if(mark.getOwner()==map[j][i+k].getOwner()){
-                                break;
-                            }
-                            else{
-                                if(mark.getScore()==map[j][i+k].getScore()){
-                                    map[j][i].AmountInsertDecreace();
-                                    map[j][i+k].AmountInsertDecreace();
-                                    map[j][i] = null;
-                                    map[j][i+k] = null;
-                                    return true;
-                                }
-                                else{
-                                    if(mark.attack(map[j][i+k])){
-                                        map[j][i+k].AmountInsertDecreace();
-                                        map[j][i] = null;
-                                        map[j][i+k] = mark;
-                                        return true;
-                                    }
-                                    else{
-                                        map[j][i].AmountInsertDecreace();
-                                        map[j][i] = null;
-                                        return true;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                break;
-            case "l":
-                for(int c=0;c<4;c++){
-                    if((movement[c][0]==i-k)&&(movement[c][1]==j)){
-                        if(map[j][i-k]==null){
-                            map[j][i] = null;
-                            map[j][i-k] = mark;
-                            return true;
-                        }
-                        else{
-                            if(mark.getOwner()==map[j][i-k].getOwner()){
-                                break;
-                            }
-                            else{
-                                if(mark.getScore()==map[j][i-k].getScore()){
-                                    map[j][i].AmountInsertDecreace();
-                                    map[j][i-k].AmountInsertDecreace();
-                                    map[j][i] = null;
-                                    map[j][i-k] = null;
-                                    return true;
-                                }
-                                else{
-                                    if(mark.attack(map[j][i-k])){
-                                        map[j][i-k].AmountInsertDecreace();
-                                        map[j][i] = null;
-                                        map[j][i-k] = mark;
-                                        return true;
-                                    }
-                                    else{
-                                        map[j][i].AmountInsertDecreace();
-                                        map[j][i] = null;
-                                        return true;
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                }
-                break;
-
-            default:
-                break;
-        }
-        System.out.println("Movement is not true");
-        return false;
-    }
-
-
-
     public void movement(){
         boolean cunt = false;
         while(!cunt){
@@ -534,16 +366,14 @@ public class core {
 
             System.out.println("enter u or b or r or l: ");
             String u = sc.next();
+            int k = 1;
 
             if(map[j][i].getName() == "scout"){
                 System.out.println("enter move amount for scout: ");
-                int k = sc.nextInt();
+                k = sc.nextInt();
+            }
 
-                cunt = this.moveScout(i,j,u,k);
-            }
-            else{
-                cunt = this.movePiecePlayer(i,j,u);
-            }
+            cunt = this.movePiecePlayer(i,j,u,k);
 
 
             if(cunt){
@@ -589,6 +419,81 @@ public class core {
         }
 
     }
+
+
+    public void ofogh(piece mark){
+        if(mark==null){
+            String space = "          ";
+            System.out.print("|" + space );
+        }
+        else{
+            if(mark.getOwner().name == "bot"){
+                System.out.print("|" + "    op    " );
+            }
+            else{
+                System.out.print("|" + mark );
+            }
+        }
+
+    }
+    public void emod(){
+        System.out.print("-");
+    }
+    public void printmap(){
+        piece islands = new island(new player("table"));
+        for(int i =0;i<110;i++){
+            this.emod();
+        }
+        System.out.println("");
+        for(int j = 0 ; j<10;j++){
+            for(int i =0;i<10;i++){
+                if(j==4){
+                    if((i==2)||(i==3)||(i==7)||(i==6)){
+                        this.ofogh(islands);
+                        continue;
+                    }
+                }
+                if(j==5){
+                    if((i==2)||(i==3)||(i==7)||(i==6)){
+                        this.ofogh(islands);
+                        continue;
+                    }
+                }
+                this.ofogh(this.map[j][i]);
+            }
+            System.out.println("");
+            for(int i =0;i<110;i++){
+                this.emod();
+            }
+            System.out.println("");
+        }
+    }
+
+
+
+    public static void main(String args[])
+    {
+        core gthis = new core(10,10);
+        player bot = gthis.layoutBot();
+        player ply = gthis.layoutPlayerCustom("taha");
+
+
+        while((ply.pieces[11].isAlive())&&(bot.pieces[11].isAlive())){
+            gthis.printmap();
+            gthis.movement();
+            gthis.botMove();
+        }
+
+        if(ply.pieces[11].isAlive()){
+            System.out.println("player is won");
+        }
+        else{
+            System.out.println("bot is won");
+        }
+
+
+    }
+
 
 
 
