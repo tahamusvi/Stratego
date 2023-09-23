@@ -1,3 +1,5 @@
+package stratego;
+
 public abstract class piece {
     private player owner;
     private int Score;
@@ -171,3 +173,4 @@ public abstract class piece {
         return tempName;
     }
 }
+

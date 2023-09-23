@@ -1,3 +1,5 @@
+package stratego;
+
 public class player {
     public String name;
     public piece[] pieces;
@@ -29,3 +31,4 @@ public class player {
         return null;
     }
 }
+
