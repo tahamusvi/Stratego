@@ -1,11 +1,13 @@
 package graphic_test;
 
 import javax.swing.*;
+
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Frame extends JFrame {
+public class Frame extends JFrame implements ActionListener{
     private JButton[][] buttons;
 
     public Frame() {
@@ -40,7 +42,7 @@ public class Frame extends JFrame {
                     button.setEnabled(false);
                     button.setText("w");
                 } else {
-                    button.addActionListener(new ButtonClickListener());
+                    button.addActionListener(this);
                 }
 
                 buttons[i][j] = button;
@@ -50,7 +52,7 @@ public class Frame extends JFrame {
 
         JPanel submitPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton submitButton = new JButton("Submit");
-        submitButton.addActionListener(new ButtonClickListener());
+        submitButton.addActionListener(this);
         submitPanel.add(submitButton);
 
         for (int i = 0; i < 4; i++) {
@@ -63,14 +65,19 @@ public class Frame extends JFrame {
         add(submitPanel, BorderLayout.SOUTH);
     }
 
-    static class ButtonClickListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
+    //static class ButtonClickListener implements ActionListener {
+    @Override
+	public void actionPerformed(ActionEvent e) {
             JButton button = (JButton) e.getSource();
             String buttonText = button.getText();
 
             if (buttonText.equals("?")) {
                 String value = JOptionPane.showInputDialog(null, "Please enter the button value", JOptionPane.INFORMATION_MESSAGE);
                 button.setText(value);
+                valueFrame newvalFrame=new valueFrame(this);
+                newvalFrame.setVisible(true);
+                
+                
             } else if (!buttonText.equals("x")) {
                 int selectedMode = JOptionPane.showConfirmDialog(null, "Do you want to change the value of the button?");
                 if (selectedMode == JOptionPane.YES_OPTION) {
@@ -81,7 +88,7 @@ public class Frame extends JFrame {
                 }
             }
         }
-    }
+    //}
 
     public static void main(String[] args) {
         new Frame();
