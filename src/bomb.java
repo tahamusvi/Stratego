@@ -7,7 +7,7 @@ public class bomb extends piece {
     }
 
     public boolean attack(piece markPiece) {
-        if(markPiece.getName()=="miner"){
+        if(markPiece.getName() == "miner"){
             return false;
         }
         else{
