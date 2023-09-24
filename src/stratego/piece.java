@@ -144,6 +144,11 @@ public abstract class piece {
     public String getName() {
         return name;
     }
+    
+    public boolean remain() {
+    	if(this.amount < this.amountInsert) return true;
+    	return false;
+    }
     public String toString(){
         int len = this.getName().length();
 
