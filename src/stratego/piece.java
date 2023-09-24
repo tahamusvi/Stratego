@@ -173,4 +173,3 @@ public abstract class piece {
         return tempName;
     }
 }
-

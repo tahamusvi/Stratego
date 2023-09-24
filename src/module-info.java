@@ -6,4 +6,5 @@
  *
  */
 module stratego {
+	requires java.desktop;
 }
