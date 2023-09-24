@@ -478,11 +478,11 @@ public class core {
     //Controllers
     public boolean pickPiece(int width,int length,String newPiece){
         piece picked = this.player_obj.findPiece(newPiece);
+        if(picked == null) return false;
         if(this.player_obj.countPlayerPiece() >= 40) return false;
 
         if(picked.getAmount() != picked.getAmountInsert()) {
-            if(map[width][length] == null ) map[width][length] = picked;
-            else return false;
+            map[width][length] = picked;
 
             picked.AmountInsertIncreace();
             return true;
