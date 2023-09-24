@@ -9,10 +9,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class valueFrame extends JFrame {
+public class valueFrame extends JFrame implements ActionListener{
 	Frame parentFrame;
     private JButton[] buttons;
     private JLabel[] labels;
+    String selectedpiece;
+    
 
     public valueFrame(Frame parentFrame) {
         super("set value");
@@ -38,7 +40,7 @@ public class valueFrame extends JFrame {
 
             labels[i] = new JLabel("Label " + (i + 1));
             buttons[i] = new JButton("select");
-            buttons[i].addActionListener(new ButtonClickListener());
+            buttons[i].addActionListener(this);
 
             panel1.add(labels[i], BorderLayout.WEST);
             panel2.add(buttons[i], BorderLayout.CENTER);
@@ -50,18 +52,37 @@ public class valueFrame extends JFrame {
         labels[1].setText("taha");
         String test = labels[6].getText();
         System.out.println(test);
+        
+        core table = new core(10,10,"mors");//این ارگومان باید عوض شه از کاربر گرفته شه
+        piece[] pieces = table.getPiecesList();
+        for(int i=0; i<12;i++) {
+        	labels[i].setText(pieces[i].getLabelText());
+        	buttons[i].setText(pieces[i].getName());
+        }
+        
     }
     
     
+    @Override
     
-    static class ButtonClickListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             JButton button = (JButton) e.getSource();
-            String buttonText = button.getText();
-            System.out.println("Button " + buttonText + " pressed.");
+            selectedpiece = button.getText();
+            for(int i=0;i<10;i++)
+            {
+            	for(int j=0;j<10;j++)
+            	{
+            		if(parentFrame.buttons[i][j].getText()=="pressed")
+            		{
+            			parentFrame.buttons[i][j].setText(selectedpiece);
+            		}
+            	}
+            }
+            this.dispose();
         }
+    
+    
     }
-}
 
 
 
@@ -77,54 +98,7 @@ public class valueFrame extends JFrame {
 
 
 
-//public class valueFrame extends JFrame {
-//    private JButton[][] buttons;
-//    Frame parentFrame;
-//    
-//    public valueFrame(Frame parentFrame) {
-//    	
-//        super("Custom Frame");
-//        this.parentFrame=parentFrame;
-//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        setLayout(new GridLayout(6, 2));
-//
-//        buttons = new JButton[6][2];
-//
-//        designFrame();
-//
-//        pack();
-//        setLocationRelativeTo(null);
-//        setVisible(true);
-//    }
-//
-//    private void designFrame() {
-//        for (int i = 0; i < 6; i++) {
-//            for (int j = 0; j < 2; j++) {
-//                JPanel panel = new JPanel(new BorderLayout());
-//
-//                JButton button = new JButton("Button " + (i * 2 + j + 1));
-//                button.addActionListener(new ButtonClickListener());
-//
-//                JLabel label = new JLabel("Label " + (i * 2 + j + 1), SwingConstants.CENTER);
-//
-//                panel.add(button, BorderLayout.CENTER);
-//                panel.add(label, BorderLayout.NORTH);
-//
-//                buttons[i][j] = button;
-//                add(panel);
-//            }
-//        }
-//    }
-//    static class ButtonClickListener implements ActionListener {
-//        public void actionPerformed(ActionEvent e) {
-//            JButton button = (JButton) e.getSource();
-//            String buttonText = button.getText();
-//            System.out.println("Button " + buttonText + " pressed.");
-//        }
-//    }
-//
-//    
-//}
+
 
 
 

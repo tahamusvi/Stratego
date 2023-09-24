@@ -145,10 +145,20 @@ public abstract class piece {
         return name;
     }
     
-    public boolean remain() {
+
+    public boolean isRemain() {
     	if(this.amount < this.amountInsert) return true;
     	return false;
     }
+    
+    public int remain() {
+    	return this.amount - this.amountInsert;
+    }
+    
+    public String getLabelText() {
+    	return this.getName() + " " + this.remain();
+    }
+
     public String toString(){
         int len = this.getName().length();
 

@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Frame extends JFrame implements ActionListener{
-    private JButton[][] buttons;
+    public JButton[][] buttons;
 
     public Frame() {
         super("STRATEGO");
@@ -69,26 +69,14 @@ public class Frame extends JFrame implements ActionListener{
     @Override
 	public void actionPerformed(ActionEvent e) {
             JButton button = (JButton) e.getSource();
-            String buttonText = button.getText();
+            button.setText("pressed");
 
-            if (buttonText.equals("?")) {
-                String value = JOptionPane.showInputDialog(null, "Please enter the button value", JOptionPane.INFORMATION_MESSAGE);
-                button.setText(value);
                 valueFrame newvalFrame=new valueFrame(this);
                 newvalFrame.setVisible(true);
                 
-                
-            } else if (!buttonText.equals("x")) {
-                int selectedMode = JOptionPane.showConfirmDialog(null, "Do you want to change the value of the button?");
-                if (selectedMode == JOptionPane.YES_OPTION) {
-                    String value = JOptionPane.showInputDialog(null, "Please enter the button value", JOptionPane.INFORMATION_MESSAGE);
-                    button.setText(value);
-                } else {
-                    System.out.println("دکمه " + buttonText + " فشرده شد.");
-                }
             }
-        }
-    //}
+        
+    
 
     public static void main(String[] args) {
         new Frame();
