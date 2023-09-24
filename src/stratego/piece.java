@@ -124,13 +124,19 @@ public abstract class piece {
     public int getAmountInsert() {
         return amountInsert;
     }
-    public void AmountInsertIncreace() {
+    public void AmountInsertIncreaceInGame() {
         this.amountInsert++;
         this.amountAlive++;
     }
-    public void AmountInsertDecreace() {
+    public void AmountInsertIncreace() {
+        this.amountInsert++;
+    }
+    public void AmountInsertDecreaceInGame() {
         this.amountInsert--;
         this.amountAlive--;
+    }
+    public void AmountInsertDecreace() {
+        this.amountInsert--;
     }
     public int getAmount() {
         return amount;

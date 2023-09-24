@@ -492,4 +492,16 @@ public class core {
             return false;
         }
     }
+    
+    
+    public boolean decreacePieceAmount(String name)
+    {
+    	for(piece mark : this.player_obj.pieces){
+            if(mark.getName().equals(name)){
+                mark.AmountInsertDecreace();
+                return true;
+            }
+        }
+    	return false;
+    }
 }
