@@ -36,9 +36,13 @@ public class valueFrame extends JFrame implements ActionListener{
     }
 
     private void designFrame() {
+        piece[] pieces = parentFrame.table.getPiecesList();
+
+        
         for (int i = 0; i < 12; i++) {
             JPanel panel1 = new JPanel(new BorderLayout());
             JPanel panel2 = new JPanel(new BorderLayout());
+            
 
             labels[i] = new JLabel("Label " + (i + 1));
             buttons[i] = new JButton("select");
@@ -56,13 +60,14 @@ public class valueFrame extends JFrame implements ActionListener{
         System.out.println(test);
         
         
-        piece[] pieces = parentFrame.table.getPiecesList();
-        for(int i=0; i<12;i++) {
+        
+        for(int i=0; i<12;i++) 
+        {
         	labels[i].setText(pieces[i].getLabelText());
         	buttons[i].setText(pieces[i].getName());
+        	if(!pieces[i].isRemain()) buttons[i].setEnabled(false);
         }
-        
-    }
+}
     
     
     @Override
@@ -70,16 +75,8 @@ public class valueFrame extends JFrame implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             JButton button = (JButton) e.getSource();
             selectedpiece = button.getText();
-            piece tempPiece = parentFrame.table.getPiecesList()[0];
-            for(int k=0; k<12; k++)
-            {
-            	if(parentFrame.table.getPiecesList()[k].getName()==selectedpiece)
-            	{
-            		tempPiece = parentFrame.table.getPiecesList()[k];
-            	}
-            }
-            if(tempPiece.isRemain())
-            {
+            
+            
             for(int i=0;i<10;i++)
             {
             	for(int j=0;j<10;j++)
@@ -87,9 +84,9 @@ public class valueFrame extends JFrame implements ActionListener{
             		if(parentFrame.buttons[i][j].getText()=="pressed")
             		{
             			parentFrame.buttons[i][j].setText(selectedpiece);
+            			System.out.println(parentFrame.table.pickPiece(i, j, selectedpiece));
             		}
             	}
-            }
             }
             this.dispose();
         }

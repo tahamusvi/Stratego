@@ -146,7 +146,7 @@ public abstract class piece {
     }
     
     public boolean isRemain() {
-    	if(this.amount < this.amountInsert) return true;
+    	if(this.amountInsert < this.amount) return true;
     	return false;
     }
     
