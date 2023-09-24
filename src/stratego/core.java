@@ -54,6 +54,21 @@ public class core {
     public void setLength(int length) {
         this.length = length;
     }
+    
+    public player getPlayer() {
+        return this.player_obj;
+    }
+
+    public void setPlayer(player player_obj) {
+        this.player_obj = player_obj;
+    }
+    
+    public piece[] getPiecesList() {
+        return this.player_obj.pieces;
+    }
+
+    
+    
 
     public boolean botMove(){
         Random rn = new Random();
@@ -443,21 +458,19 @@ public class core {
         player bot = gthis.layoutBot();
         player ply = gthis.layoutPlayerCustom("taha");
 
-
-        while((ply.pieces[11].isAlive())&&(bot.pieces[11].isAlive())){
-            gthis.printmap();
-            gthis.movement();
-            gthis.botMove();
-        }
-
-        if(ply.pieces[11].isAlive()){
-            System.out.println("player is won");
-        }
-        else{
-            System.out.println("bot is won");
-        }
-
-        
+//
+//        while((ply.pieces[11].isAlive())&&(bot.pieces[11].isAlive())){
+//            gthis.printmap();
+//            gthis.movement();
+//            gthis.botMove();
+//        }
+//
+//        if(ply.pieces[11].isAlive()){
+//            System.out.println("player is won");
+//        }
+//        else{
+//            System.out.println("bot is won");
+//        }
 
     }
 
