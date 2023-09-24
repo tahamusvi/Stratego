@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 public class Frame extends JFrame implements ActionListener{
     public JButton[][] buttons;
+    public core table;
 
     public Frame() {
         super("STRATEGO");
@@ -17,7 +18,7 @@ public class Frame extends JFrame implements ActionListener{
         setLayout(new BorderLayout());
 
         buttons = new JButton[10][10];
-
+        table = new core(10,10,"mors");//این ارگومان باید عوض شه از کاربر گرفته شه
         designFrame();
         
         pack();

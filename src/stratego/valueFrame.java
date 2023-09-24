@@ -53,8 +53,8 @@ public class valueFrame extends JFrame implements ActionListener{
         String test = labels[6].getText();
         System.out.println(test);
         
-        core table = new core(10,10,"mors");//این ارگومان باید عوض شه از کاربر گرفته شه
-        piece[] pieces = table.getPiecesList();
+        
+        piece[] pieces = parentFrame.table.getPiecesList();
         for(int i=0; i<12;i++) {
         	labels[i].setText(pieces[i].getLabelText());
         	buttons[i].setText(pieces[i].getName());
@@ -68,6 +68,7 @@ public class valueFrame extends JFrame implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             JButton button = (JButton) e.getSource();
             selectedpiece = button.getText();
+            if()
             for(int i=0;i<10;i++)
             {
             	for(int j=0;j<10;j++)
