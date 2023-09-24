@@ -145,7 +145,6 @@ public abstract class piece {
         return name;
     }
     
-
     public boolean isRemain() {
     	if(this.amount < this.amountInsert) return true;
     	return false;
@@ -156,9 +155,8 @@ public abstract class piece {
     }
     
     public String getLabelText() {
-    	return this.getName() + " " + this.remain();
+    	return this.getName() + " (" + this.remain()+")";
     }
-
     public String toString(){
         int len = this.getName().length();
 
