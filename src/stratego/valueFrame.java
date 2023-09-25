@@ -1,6 +1,9 @@
 package stratego;
 
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
 import javax.swing.JFrame;
 import javax.xml.transform.Templates;
 
@@ -33,6 +36,53 @@ public class valueFrame extends JFrame implements ActionListener{
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
+        
+this.addWindowListener(new WindowListener() {
+			
+			@Override
+			public void windowOpened(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowIconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeiconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				parentFrame.setEnabled(true);
+				
+			}
+			
+			@Override
+			public void windowClosed(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowActivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+        	
+        
     }
 
     private void designFrame() {
@@ -55,9 +105,7 @@ public class valueFrame extends JFrame implements ActionListener{
             add(panel2);
         }
         
-        labels[1].setText("taha");
-        String test = labels[6].getText();
-        System.out.println(test);
+        
         
         
         
@@ -81,13 +129,14 @@ public class valueFrame extends JFrame implements ActionListener{
             {
             	for(int j=0;j<10;j++)
             	{
-            		if(parentFrame.buttons[i][j].getText()=="pressed")
+            		if(parentFrame.buttons[i][j].getText()=="click")
             		{
             			parentFrame.buttons[i][j].setText(selectedpiece);
             			System.out.println(parentFrame.table.pickPiece(i, j, selectedpiece));
             		}
             	}
             }
+            parentFrame.setEnabled(true);
             this.dispose();
         }
     

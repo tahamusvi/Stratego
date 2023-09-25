@@ -36,9 +36,12 @@ public class Frame extends JFrame implements ActionListener{
                     button.setBackground(Color.red);
                 } else if (i == 4 || i == 5) {
                     button.setBackground(Color.white);
+                    button.setEnabled(false);
                     button.setText("");
                 }
-
+                else {
+                	 button.setEnabled(false);
+				}
                 if ((i == 4 || i == 5) && (j == 2 || j == 3 || j == 6 || j == 7)) {
                     button.setEnabled(false);
                     button.setText("w");
@@ -70,10 +73,28 @@ public class Frame extends JFrame implements ActionListener{
     @Override
 	public void actionPerformed(ActionEvent e) {
             JButton button = (JButton) e.getSource();
-            button.setText("pressed");
+            for(int i=0;i<10;i++)
+            {
+            	for(int j=0;j<10;j++)
+            	{
+            		if(this.buttons[i][j].getText()=="click")
+            		{
+            			this.buttons[i][j].setText("?");
+            		}
+            	}
+            }
+            if(button.getText()=="?")
+            {
+            	button.setText("click");
+            }
+            else {
+				this.table.decreacePieceAmount(button.getText());
+				button.setText("click");
+			}
 
                 valueFrame newvalFrame=new valueFrame(this);
                 newvalFrame.setVisible(true);
+                this.setEnabled(false);
                 
             }
         
