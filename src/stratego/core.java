@@ -30,17 +30,32 @@ public class core {
         setWidth(width);
         map = new piece[getWidth()][getLength()];
     }
-
-    public core(int width,int length,String name){
-        setLength(length);
-        setWidth(width);
+    
+    public core(int width,int length,String name, int section){
+    	setLength(10);
+        setWidth(10);
         map = new piece[getWidth()][getLength()];
-
-        this.player_obj = new player(name);
-        piece[] whoPiece = this.piecesForPlayer(this.player_obj);
         
         this.bot = this.layoutBot();
+        piece[] whoPiece;
+
+        if(section == 1) {
+        	this.player_obj = new player(name);
+            whoPiece = this.piecesForPlayer(this.player_obj);
+        }
+        else if(section == 2) {
+        	this.player_obj = this.layoutPlayerCustom(name);
+            whoPiece = this.player_obj.pieces;
+        }
+        else {
+        	this.player_obj = layoutFromFile("StrategoMap.txt",name);
+            whoPiece = this.player_obj.pieces;
+        	
+        }
+                      
+      
     }
+
 
     public int getWidth() {
         return width;
@@ -135,7 +150,6 @@ public class core {
         ply.pieces = pieces;
         return pieces;
     }
-
 
     public boolean insertPiece(int length,int width,piece newPiece){
         map[width][length] = newPiece;
@@ -426,8 +440,8 @@ public class core {
         }
     }
 
-    public player layoutFromFile(String fileName){
-        player ply = new player("palyer 1");
+    public player layoutFromFile(String fileName,String name){
+        player ply = new player(name);
         piece[] pieces = this.piecesForPlayer(ply);
         String line = null;
         piece mark = null;
@@ -464,7 +478,6 @@ public class core {
 //        core gthis = new core(10,10);
 //        player bot = gthis.layoutBot();
 //        player ply = gthis.layoutPlayerCustom("taha");
-
 //
 //        while((ply.pieces[11].isAlive())&&(bot.pieces[11].isAlive())){
 //            gthis.printmap();
