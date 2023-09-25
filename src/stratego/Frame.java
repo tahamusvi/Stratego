@@ -73,28 +73,61 @@ public class Frame extends JFrame implements ActionListener{
     @Override
 	public void actionPerformed(ActionEvent e) {
             JButton button = (JButton) e.getSource();
-            for(int i=0;i<10;i++)
+            if(button.getText()=="Submit")
             {
-            	for(int j=0;j<10;j++)
-            	{
-            		if(this.buttons[i][j].getText()=="click")
-            		{
-            			this.buttons[i][j].setText("?");
-            		}
+            	if(!table.getPlayer().isRemain()) {
+            	 Object[] options = {"start play", "save values", "cancel"};
+                 
+                 int choice = JOptionPane.showOptionDialog(
+                     null,
+                     "what do you want to do?",
+                     "submit",
+                     JOptionPane.YES_NO_CANCEL_OPTION,
+                     JOptionPane.QUESTION_MESSAGE,
+                     null,
+                     options,
+                     options[2]
+                 );
+                 if (choice == JOptionPane.YES_OPTION) {
+                     System.out.println("شما گزینه بازی را انتخاب کردید.");
+                 } else if (choice == JOptionPane.NO_OPTION) {
+                     System.out.println("شما گزینه سیو را انتخاب کردید.");
+                     table.writeTxt();
+                 } else if (choice == JOptionPane.CANCEL_OPTION) {
+                     System.out.println("شما گزینه لغو را انتخاب کردید.");
+                 }
             	}
+            	else {
+					JOptionPane.showMessageDialog(null, "set value of all the buttons");
+				}
             }
-            if(button.getText()=="?")
-            {
-            	button.setText("click");
-            }
+            
+            
             else {
-				this.table.decreacePieceAmount(button.getText());
-				button.setText("click");
-			}
+            	for(int i=0;i<10;i++)
+                {
+                	for(int j=0;j<10;j++)
+                	{
+                		if(this.buttons[i][j].getText()=="click")
+                		{
+                			this.buttons[i][j].setText("?");
+                		}
+                	}
+                }
+                if(button.getText()=="?")
+                {
+                	button.setText("click");
+                }
+                else {
+    				this.table.decreacePieceAmount(button.getText());
+    				button.setText("click");
+    			}
 
-                valueFrame newvalFrame=new valueFrame(this);
-                newvalFrame.setVisible(true);
-                this.setEnabled(false);
+                    valueFrame newvalFrame=new valueFrame(this);
+                    newvalFrame.setVisible(true);
+                    this.setEnabled(false);
+			}
+            
                 
             }
         
