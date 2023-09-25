@@ -3,6 +3,7 @@ package stratego;
 public class player {
     public String name;
     public piece[] pieces;
+    
     public player(String name){
         this.name = name;
     }
@@ -29,5 +30,14 @@ public class player {
             }
         }
         return null;
+    }
+    
+    public boolean isRemain() {
+    	for(piece mark : this.pieces){
+            if(mark.isRemain()){
+                return true;
+            }
+        }
+        return false;
     }
 }

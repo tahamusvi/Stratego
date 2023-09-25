@@ -129,8 +129,6 @@ public class core {
     }
 
 
-
-
     public boolean insertPiece(int length,int width,piece newPiece){
         map[width][length] = newPiece;
         newPiece.AmountInsertIncreace();
@@ -350,7 +348,6 @@ public class core {
 
     }
 
-
     public void ofogh(piece mark){
         if(mark==null){
             String space = "          ";
@@ -503,4 +500,5 @@ public class core {
         }
     	return false;
     }
+    
 }
