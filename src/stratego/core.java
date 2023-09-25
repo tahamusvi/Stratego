@@ -36,7 +36,7 @@ public class core {
         setWidth(width);
         map = new piece[getWidth()][getLength()];
 
-        this.bot = new player(name);
+        this.player_obj = new player(name);
         piece[] whoPiece = this.piecesForPlayer(this.player_obj);
         
         this.bot = this.layoutBot();
@@ -461,9 +461,9 @@ public class core {
 
     public static void main(String args[])
     {
-        core gthis = new core(10,10);
-        player bot = gthis.layoutBot();
-        player ply = gthis.layoutPlayerCustom("taha");
+//        core gthis = new core(10,10);
+//        player bot = gthis.layoutBot();
+//        player ply = gthis.layoutPlayerCustom("taha");
 
 //
 //        while((ply.pieces[11].isAlive())&&(bot.pieces[11].isAlive())){
