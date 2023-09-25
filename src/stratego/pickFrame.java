@@ -7,18 +7,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Frame extends JFrame implements ActionListener{
+public class pickFrame extends JFrame implements ActionListener{
     public JButton[][] buttons;
-    public core table;
+    public core inputtable;
 
-    public Frame() {
+
+    public pickFrame(core table) {
         super("STRATEGO");
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
         buttons = new JButton[10][10];
-        table = new core(10,10,"mors");//این ارگومان باید عوض شه از کاربر گرفته شه
+        inputtable = table;
         designFrame();
         
         pack();
@@ -75,7 +76,7 @@ public class Frame extends JFrame implements ActionListener{
             JButton button = (JButton) e.getSource();
             if(button.getText()=="Submit")
             {
-            	if(!table.getPlayer().isRemain()) {
+            	if(!inputtable.getPlayer().isRemain()) {
             	 Object[] options = {"start play", "save values", "cancel"};
                  
                  int choice = JOptionPane.showOptionDialog(
@@ -90,11 +91,11 @@ public class Frame extends JFrame implements ActionListener{
                  );
                  if (choice == JOptionPane.YES_OPTION) {
                      System.out.println("شما گزینه بازی را انتخاب کردید.");
-                     playFrame newplayFrame = new playFrame();
+                     playFrame newplayFrame = new playFrame(inputtable);
                      this.dispose();
                  } else if (choice == JOptionPane.NO_OPTION) {
                      System.out.println("شما گزینه سیو را انتخاب کردید.");
-                     table.writeTxt();
+                     inputtable.writeTxt();
                  } else if (choice == JOptionPane.CANCEL_OPTION) {
                      System.out.println("شما گزینه لغو را انتخاب کردید.");
                  }
@@ -121,7 +122,7 @@ public class Frame extends JFrame implements ActionListener{
                 	button.setText("click");
                 }
                 else {
-    				this.table.decreacePieceAmount(button.getText());
+    				this.inputtable.decreacePieceAmount(button.getText());
     				button.setText("click");
     			}
 
@@ -136,7 +137,33 @@ public class Frame extends JFrame implements ActionListener{
     
 
     public static void main(String[] args) {
-        new Frame();
+    	
+    	
+    	String username = JOptionPane.showInputDialog(null,"Please Enter Your Name...", "Login", JOptionPane.INFORMATION_MESSAGE);
+    	core table = new core(10,10,username);
+    	Object[] options = {"user", "custom", "load"};
+        
+        int choice = JOptionPane.showOptionDialog(
+            null,
+            "Who will pick?",
+            "start",
+            JOptionPane.YES_NO_CANCEL_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            options,
+            options[2]
+        );
+        if (choice == JOptionPane.YES_OPTION) {
+            System.out.println("شما گزینه user را انتخاب کردید.");
+            new pickFrame(table);
+           
+        } else if (choice == JOptionPane.NO_OPTION) {
+            System.out.println("شما گزینه custom را انتخاب کردید.");
+            
+        } else if (choice == JOptionPane.CANCEL_OPTION) {
+            System.out.println("شما گزینه load را انتخاب کردید.");
+        }
+       
     }
 }
 

@@ -16,14 +16,14 @@ public class playFrame extends JFrame implements ActionListener{
 	public JButton[][] buttons;
     public core table;
 
-    public playFrame() {
+    public playFrame(core tableinput) {
 
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
         buttons = new JButton[10][10];
-        table = new core(10,10,"mors");//این ارگومان باید عوض شه از کاربر گرفته شه
+        table = tableinput;
         designFrame();
         
         pack();
@@ -39,6 +39,7 @@ public class playFrame extends JFrame implements ActionListener{
 
                 if (i == 6 || i == 7 || i == 8 || i == 9) {
                     button.setBackground(Color.red);
+                    button.setText(table.getPieceNameOnMap(j, i));
                 } else if (i == 4 || i == 5) {
                     button.setBackground(Color.white);
                     
@@ -57,9 +58,7 @@ public class playFrame extends JFrame implements ActionListener{
             }
         }
 
-
-
-        for (int i = 0; i < 4; i++) {
+      for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 10; j++) {
                 buttons[i][j].setText("x");
             }

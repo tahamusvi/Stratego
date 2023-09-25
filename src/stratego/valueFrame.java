@@ -7,7 +7,7 @@ import java.awt.event.WindowListener;
 import javax.swing.JFrame;
 import javax.xml.transform.Templates;
 
-import stratego.Frame;
+import stratego.pickFrame;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,13 +15,13 @@ import java.awt.event.ActionListener;
 
 
 public class valueFrame extends JFrame implements ActionListener{
-	Frame parentFrame;
+	pickFrame parentFrame;
     private JButton[] buttons;
     private JLabel[] labels;
     String selectedpiece;
     
 
-    public valueFrame(Frame parentFrame) {
+    public valueFrame(pickFrame parentFrame) {
         super("set value");
         this.parentFrame=parentFrame;
 
@@ -86,7 +86,7 @@ this.addWindowListener(new WindowListener() {
     }
 
     private void designFrame() {
-        piece[] pieces = parentFrame.table.getPiecesList();
+        piece[] pieces = parentFrame.inputtable.getPiecesList();
 
         
         for (int i = 0; i < 12; i++) {
@@ -132,7 +132,7 @@ this.addWindowListener(new WindowListener() {
             		if(parentFrame.buttons[i][j].getText()=="click")
             		{
             			parentFrame.buttons[i][j].setText(selectedpiece);
-            			System.out.println(parentFrame.table.pickPiece(i, j, selectedpiece));
+            			System.out.println(parentFrame.inputtable.pickPiece(i, j, selectedpiece));
             		}
             	}
             }
