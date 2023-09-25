@@ -404,8 +404,10 @@ public class core {
 
             for(int i=0;i<10;i++){
                 for(int j=6;j<10;j++){
-                    bw.write(map[j][i].getName()+","+i+","+j);
-                    bw.newLine();
+                	if(map[j][i] != null) {
+                		bw.write(map[j][i].getName()+","+i+","+j);
+                		bw.newLine();
+                	}
                 }
             }
 
