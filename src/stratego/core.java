@@ -23,6 +23,7 @@ public class core {
     private int length = 1;
     private piece[][] map;
     private player player_obj;
+    private player bot;
 
     public core(int width,int length){
         setLength(length);
@@ -35,8 +36,10 @@ public class core {
         setWidth(width);
         map = new piece[getWidth()][getLength()];
 
-        this.player_obj = new player(name);
+        this.bot = new player(name);
         piece[] whoPiece = this.piecesForPlayer(this.player_obj);
+        
+        this.bot = this.layoutBot();
     }
 
     public int getWidth() {
@@ -65,6 +68,11 @@ public class core {
     
     public piece[] getPiecesList() {
         return this.player_obj.pieces;
+    }
+    
+    public String getPieceNameOnMap(int i,int j) {
+    	if(map[j][i] != null) return map[j][i].getName();
+    	return "None";
     }
 
     
@@ -491,6 +499,15 @@ public class core {
         }
     }
     
+    public boolean stillGame() {
+    	return (player_obj.pieces[11].isAlive())&&(bot.pieces[11].isAlive());
+    }
+    
+    public boolean whoWin(){
+    	if(player_obj.pieces[11].isAlive()) return true;
+    	return false;
+    		
+    }
     
     public boolean decreacePieceAmount(String name)
     {
