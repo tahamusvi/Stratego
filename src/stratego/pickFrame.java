@@ -13,7 +13,7 @@ public class pickFrame extends JFrame implements ActionListener{
 
 
     public pickFrame(core table) {
-        super("STRATEGO");
+        super("PICK");
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -140,7 +140,7 @@ public class pickFrame extends JFrame implements ActionListener{
     	
     	
     	String username = JOptionPane.showInputDialog(null,"Please Enter Your Name...", "Login", JOptionPane.INFORMATION_MESSAGE);
-    	core table = new core(10,10,username);
+    	core table ;
     	Object[] options = {"user", "custom", "load"};
         
         int choice = JOptionPane.showOptionDialog(
@@ -155,13 +155,18 @@ public class pickFrame extends JFrame implements ActionListener{
         );
         if (choice == JOptionPane.YES_OPTION) {
             System.out.println("شما گزینه user را انتخاب کردید.");
+            table = new core(10,10,username,1);
             new pickFrame(table);
            
         } else if (choice == JOptionPane.NO_OPTION) {
             System.out.println("شما گزینه custom را انتخاب کردید.");
-            
+            table = new core(10,10,username,2);
+            table.writeTxt();
+            playFrame newplayFrame = new playFrame(table);
         } else if (choice == JOptionPane.CANCEL_OPTION) {
             System.out.println("شما گزینه load را انتخاب کردید.");
+            table = new core(10,10,username,3);
+            playFrame newplayFrame = new playFrame(table);
         }
        
     }
