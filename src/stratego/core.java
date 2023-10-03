@@ -24,6 +24,7 @@ public class core {
     private piece[][] map;
     private player player_obj;
     private player bot;
+    private int[] click;
 
     public core(int width,int length){
         setLength(length);
@@ -37,8 +38,13 @@ public class core {
         map = new piece[getWidth()][getLength()];
         
         this.bot = this.layoutBot();
+        
+        this.click = new int[2];
+        this.click[0] = -1;
+        this.click[1] = -1;
+        
         piece[] whoPiece;
-
+        
         if(section == 1) {
         	this.player_obj = new player(name);
             whoPiece = this.piecesForPlayer(this.player_obj);
@@ -88,10 +94,7 @@ public class core {
     public String getPieceNameOnMap(int i,int j) {
     	if(map[j][i] != null) return map[j][i].getName();
     	return "None";
-    }
-
-    
-    
+    }    
 
     public boolean botMove(){
         Random rn = new Random();
@@ -130,6 +133,17 @@ public class core {
         piece mark = map[i][j];
         mark.canMove(i,j);
         return true;
+    }
+    
+    public boolean CanGoThere(int i, int j){
+        piece mark = map[click[0]][click[1]];
+        
+        int[][] whereCan = mark.canMove(i,j);
+        
+        for (int k = 0; k < whereCan.length; k++) {
+            if((whereCan[k][0] == i) && (whereCan[k][1] == j)) return true;
+        }
+        return false;
     }
 
     public piece[] piecesForPlayer(player ply){
@@ -531,6 +545,23 @@ public class core {
             }
         }
     	return false;
+    }
+    
+    public boolean PieceGo(int i,int j)
+    {
+    	if((this.click[0] == -1) && (this.click[1] == -1))
+    	{
+    		this.click[0] = i;
+    		this.click[1] = j;
+    		return true;
+    	}
+    	else
+    	{
+    		boolean result = CanGoThere(i,j);
+    		this.click[0] = -1;
+    		this.click[1] = -1;
+    		return result;
+    	}
     }
     
 }
