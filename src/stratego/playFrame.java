@@ -15,10 +15,11 @@ import javax.swing.JPanel;
 public class playFrame extends JFrame implements ActionListener{
 	public JButton[][] buttons;
     public core table;
+   
 
     public playFrame(core tableinput) {
 
-        
+    	
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -72,9 +73,18 @@ public class playFrame extends JFrame implements ActionListener{
     @Override
 	public void actionPerformed(ActionEvent e) {
             JButton button = (JButton) e.getSource();
+            String click = button.getText();
+            for(int i=0 ;i<10;i++)
+            {
+            	for(int j=0 ;j<10;j++)
+            	{
+            		if(buttons[i][j] == button)
+            		{
+            			Boolean check = table.PieceGo(j, i);
+            			System.out.println(check);
+            		}
+            	}
+            }
             
-			
-            
-                
             }
 }
