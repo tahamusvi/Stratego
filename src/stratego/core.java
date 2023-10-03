@@ -96,38 +96,26 @@ public class core {
     	return "None";
     }    
 
-    public boolean botMove(){
-        Random rn = new Random();
-        int i = 0;
-        int j = 0;
-        int k =0;
-        String l= "u" ;
-        boolean cunt = false;
-        while(!cunt){
-            i = rn.nextInt(0,9);
-            j = rn.nextInt(0,4);
-            k = rn.nextInt(0,4);
-            switch (k){
-                case 0:
-                    l = "u";
-                    break;
-                case 1:
-                    l = "b";
-                    break;
-                case 2:
-                    l = "r";
-                    break;
-                case 3:
-                    l = "l";
-                    break;
-            }
-            if(map[j][i]!=null){
-                cunt = movePiecePlayer(i,j,l,1);
-            }
-        }
-
-        return true;
-    }
+//    public boolean botMove(){
+//        Random rn = new Random();
+//        int i = 0;
+//        int j = 0;
+//        int k =0;
+//        String l= "u" ;
+//        boolean cunt = false;
+//        while(!cunt){
+//            i = rn.nextInt(0,9);
+//            j = rn.nextInt(0,4);
+//            k = rn.nextInt(0,9);
+//            l = rn.nextInt(0,9);
+//            
+//            if(map[j][i] != null ){
+//                cunt = movePiecePlayer(i,j,l,1);
+//            }
+//        }
+//
+//        return true;
+//    }
 
     public boolean WhereCanGo(int i, int j){
         piece mark = map[i][j];
@@ -135,16 +123,6 @@ public class core {
         return true;
     }
     
-    public boolean CanGoThere(int i, int j){
-        piece mark = map[click[0]][click[1]];
-        
-        int[][] whereCan = mark.canMove(i,j);
-        
-        for (int k = 0; k < whereCan.length; k++) {
-            if((whereCan[k][0] == i) && (whereCan[k][1] == j)) return true;
-        }
-        return false;
-    }
 
     public piece[] piecesForPlayer(player ply){
         piece[] pieces = new piece[12];
@@ -273,7 +251,7 @@ public class core {
         return ply;
     }
 
-    public boolean movePiecePlayer(int i,int j, String t,int k){
+    public boolean movePiecePlayer(int i,int j, int finalI ,int finalJ){
         piece mark = map[j][i];
         int count_move = 4;
         if(mark.getName() == "scout")
@@ -282,29 +260,7 @@ public class core {
         }
 
         int[][] movement = mark.canMove(i,j);
-        int finalI = 0;
-        int finalJ = 0;
-
-        switch (t){
-            case "u":
-                finalI = i;
-                finalJ = j-k;
-                break;
-            case "b":
-                finalI = i;
-                finalJ = j+k;
-                break;
-            case "r":
-                finalI = i+k;
-                finalJ = j;
-                break;
-            case "l":
-                finalI = i-k;
-                finalJ = j;
-                break;      
-           default:
-                break;
-        }
+        
 
         for(int c=0;c<count_move;c++){
             if((movement[c][0]==finalI)&&(movement[c][1]==finalJ)){
@@ -350,39 +306,6 @@ public class core {
         return false;
     }
 
-    public void movement(){
-        boolean cunt = false;
-        while(!cunt){
-            Scanner sc = new Scanner(System.in);
-
-            System.out.println("Enter posation Piece: ");
-
-            System.out.println("enter length: ");
-            int i = sc.nextInt();
-            i--;
-            System.out.println("enter width: ");
-            int j = sc.nextInt();
-            j--;
-
-            System.out.println("enter u or b or r or l: ");
-            String u = sc.next();
-            int k = 1;
-
-            if(map[j][i].getName() == "scout"){
-                System.out.println("enter move amount for scout: ");
-                k = sc.nextInt();
-            }
-
-            cunt = this.movePiecePlayer(i,j,u,k);
-
-
-            if(cunt){
-                System.out.println("succses");
-            }
-
-        }
-
-    }
 
     public void ofogh(piece mark){
         if(mark==null){
@@ -487,26 +410,6 @@ public class core {
         return ply;
     }
 
-    public static void main(String args[])
-    {
-//        core gthis = new core(10,10);
-//        player bot = gthis.layoutBot();
-//        player ply = gthis.layoutPlayerCustom("taha");
-//
-//        while((ply.pieces[11].isAlive())&&(bot.pieces[11].isAlive())){
-//            gthis.printmap();
-//            gthis.movement();
-//            gthis.botMove();
-//        }
-//
-//        if(ply.pieces[11].isAlive()){
-//            System.out.println("player is won");
-//        }
-//        else{
-//            System.out.println("bot is won");
-//        }
-
-    }
 
 
     //Controllers
@@ -549,6 +452,7 @@ public class core {
     
     public boolean PieceGo(int i,int j)
     {
+    	
     	if((this.click[0] == -1) && (this.click[1] == -1))
     	{
     		this.click[0] = i;
@@ -557,7 +461,7 @@ public class core {
     	}
     	else
     	{
-    		boolean result = CanGoThere(i,j);
+    		boolean result = movePiecePlayer(click[0],click[1],i,j);
     		this.click[0] = -1;
     		this.click[1] = -1;
     		return result;
