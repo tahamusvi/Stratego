@@ -307,6 +307,7 @@ public class core {
 
     public boolean movePiecePlayer(int srcRow, int srcCol, int destRow, int destCol) {
         piece currentPiece = map[srcCol][srcRow];
+        if(currentPiece == null) return false;
 
         int[][] possibleMoves = currentPiece.canMove(srcRow, srcCol);
 
