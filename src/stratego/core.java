@@ -107,10 +107,7 @@ public class core {
     			return map[j][i].getName();
     		}
     	}
-    	else
-    	{
-    		return "";
-    	}
+    	return "";
     }    
 
     public boolean botMove() {
@@ -485,9 +482,11 @@ public class core {
     	return (player_obj.pieces[11].isAlive())&&(bot.pieces[11].isAlive());
     }
     
-    public boolean whoWin(){
-    	if(player_obj.pieces[11].isAlive()) return true;
-    	return false;
+    public int whoWin(){
+    	if(player_obj.pieces[11].isAlive() && (bot.pieces[11].isAlive())) return 0;
+    	if(player_obj.pieces[11].isAlive()) return 1;
+    	if(bot.pieces[11].isAlive()) return 2;
+    	return 0;
     		
     }
     
@@ -516,11 +515,11 @@ public class core {
     		boolean result = movePiecePlayer(click[0],click[1],i,j);
     		if(result)
     		{
-    			this.click[0] = -1;
-        		this.click[1] = -1;
         		this.botMove();
         		this.printmap();
     		}
+    		this.click[0] = -1;
+    		this.click[1] = -1;
     		return result;
     	}
     }
