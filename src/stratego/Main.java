@@ -117,7 +117,8 @@ public class Main extends JFrame {
 	        aboutUsButton.addActionListener(new ActionListener() {
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
- 
+	            	AboutUsFrame newAboutUsFrame = new AboutUsFrame();
+	            	newAboutUsFrame.setVisible(true);
 	            }
 	        });
 	    }
@@ -128,11 +129,8 @@ public class Main extends JFrame {
 	
 public static void main(String[] args) {
 	
-	 SwingUtilities.invokeLater(new Runnable() {
-         public void run() {
-            Main frame = new Main();
+	 		Main frame = new Main();
              frame.setVisible(true);
-         }
-     });
+         
 }
 }
