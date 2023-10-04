@@ -96,27 +96,24 @@ public class core {
     	return "None";
     }    
 
-    public boolean botMove(){
+    public boolean botMove() {
         Random rn = new Random();
         int i = 0;
         int j = 0;
         int k = 0;
         int l = 0;
-        boolean cunt = false;
-        while(!cunt){
-        	
-            i = rn.nextInt(0,9);
-            j = rn.nextInt(0,9);
-            k = rn.nextInt(5,9);
-            l = rn.nextInt(5,9);
-            
+        boolean moveSuccessful = false;
+        
+        while (!moveSuccessful) {
+            i = rn.nextInt(9);
+            j = rn.nextInt(9);
+            k = rn.nextInt(9);
+            l = rn.nextInt(9);
+
             piece mark = map[j][i];
-            if(mark != null ){
-            	if(mark.getOwner().equals(this.bot)) {
-                    cunt = movePiecePlayer(i,j,k,l);
-                }
+            if (mark != null && mark.getOwner().equals(this.bot)) {
+                moveSuccessful = movePiecePlayer(i, j, k, l);
             }
-                        
         }
 
         return true;
@@ -128,21 +125,39 @@ public class core {
         return true;
     }
     
-    public boolean canJump(int i,int j)
+    public boolean canJump(int i,int j,int fi,int fj)
     {
-    	int distanceI = i - this.click[0];
-    	int distanceJ = j - this.click[1];
-    	if(distanceI < 0) distanceI *= -1;
-    	if(distanceJ < 0) distanceJ *= -1;
+    	int distanceI = i - fi;
+    	int distanceJ = j - fj;
     	
-    	
-    	for(int x=0; x < distanceI; x++)
+    	if(distanceI == 0)
     	{
-    		for(int y=0 ; y < distanceJ; y++)
+    		for(int y=1 ; y <Math.abs(distanceJ); y++)
     		{
-    			if(map[y][x] != null) return false;
+    			if(fj > j)
+    			{
+    				if(map[j+y][i] != null) return false;
+    			}
+    			else {
+    				if(map[j-y][i] != null) return false;
+    			}
     		}
     	}
+    	else 
+    	{
+    		for(int x=1 ; x <Math.abs(distanceI); x++)
+    		{
+    			if(fi > i)
+    			{
+    				if(map[j][i+x] != null) return false;
+    			}
+    			else {
+    				if(map[j][i-x] != null) return false;
+    			}
+    		}
+    	}
+    	
+    	
     	return true;
     	
     }
@@ -285,6 +300,7 @@ public class core {
             int moveCol = possibleMoves[i][1];
 
             if (moveRow == destRow && moveCol == destCol) {
+            	if (!canJump(srcRow,srcCol,destRow,destCol)) return false;
                 piece destinationPiece = map[destCol][destRow];
 
                 if (destinationPiece == null) {
