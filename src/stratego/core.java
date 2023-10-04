@@ -92,7 +92,24 @@ public class core {
     }
     
     public String getPieceNameOnMap(int i,int j) {
-    	if(map[j][i] != null) return map[j][i].getName();
+    	if(j == 4 || j == 5)
+    	{
+    		if(i == 2 || i == 3 || i == 6 || i == 7) {
+    			return "w";
+    		}
+    		else {
+    			return "";
+    		}
+    	}
+    	if(map[j][i] != null) 
+    	{
+    		if(map[j][i].getOwner() == this.bot) {
+    			return "x";
+    		}
+    		else {
+    			return map[j][i].getName();
+    		}
+    	}
     	return "None";
     }    
 
@@ -162,7 +179,6 @@ public class core {
     	
     }
     
-
     public piece[] piecesForPlayer(player ply){
         piece[] pieces = new piece[12];
 
