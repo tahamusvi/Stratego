@@ -90,6 +90,11 @@ public class playFrame extends JFrame implements ActionListener{
             				JOptionPane.showMessageDialog(this,"You cannot move your opponent's pieces");
             				return;
             			}
+            			if(click=="")
+            			{
+            				JOptionPane.showMessageDialog(this,"You cannot click white buttons for the first time!");
+            				return;
+            			}
             			Boolean check = table.PieceGo(this,j, i);
             			System.out.println(check);
             		}
