@@ -489,6 +489,11 @@ public class core {
     	return 0;
     		
     }
+    public boolean isFirst() {
+    	if(this.click[0]==-1)
+    		return true;
+    	return false;
+    }
     
     public boolean decreacePieceAmount(String name)
     {

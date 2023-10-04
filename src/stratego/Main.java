@@ -6,8 +6,9 @@ public class Main {
 
 public static void main(String[] args) {
     	
+		String username ="user";
+    	username = JOptionPane.showInputDialog(null,"Please Enter Your Name...", "Login", JOptionPane.INFORMATION_MESSAGE);
     	
-    	String username = JOptionPane.showInputDialog(null,"Please Enter Your Name...", "Login", JOptionPane.INFORMATION_MESSAGE);
     	core table ;
     	Object[] options = {"user", "custom", "load"};
         

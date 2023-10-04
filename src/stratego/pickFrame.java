@@ -80,7 +80,7 @@ public class pickFrame extends JFrame implements ActionListener{
             	 Object[] options = {"start play", "save values", "cancel"};
                  
                  int choice = JOptionPane.showOptionDialog(
-                     null,
+                     this,
                      "what do you want to do?",
                      "submit",
                      JOptionPane.YES_NO_CANCEL_OPTION,
@@ -101,7 +101,7 @@ public class pickFrame extends JFrame implements ActionListener{
                  }
             	}
             	else {
-					JOptionPane.showMessageDialog(null, "set value of all the buttons");
+					JOptionPane.showMessageDialog(this, "set value of all the buttons");
 				}
             }
             
