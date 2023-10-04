@@ -96,31 +96,55 @@ public class core {
     	return "None";
     }    
 
-//    public boolean botMove(){
-//        Random rn = new Random();
-//        int i = 0;
-//        int j = 0;
-//        int k =0;
-//        String l= "u" ;
-//        boolean cunt = false;
-//        while(!cunt){
-//            i = rn.nextInt(0,9);
-//            j = rn.nextInt(0,4);
-//            k = rn.nextInt(0,9);
-//            l = rn.nextInt(0,9);
-//            
-//            if(map[j][i] != null ){
-//                cunt = movePiecePlayer(i,j,l,1);
-//            }
-//        }
-//
-//        return true;
-//    }
+    public boolean botMove(){
+        Random rn = new Random();
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        int l = 0;
+        boolean cunt = false;
+        while(!cunt){
+        	
+            i = rn.nextInt(0,9);
+            j = rn.nextInt(0,9);
+            k = rn.nextInt(5,9);
+            l = rn.nextInt(5,9);
+            
+            piece mark = map[j][i];
+            if(mark != null ){
+            	if(mark.getOwner().equals(this.bot)) {
+                    cunt = movePiecePlayer(i,j,k,l);
+                }
+            }
+                        
+        }
+
+        return true;
+    }
 
     public boolean WhereCanGo(int i, int j){
         piece mark = map[i][j];
         mark.canMove(i,j);
         return true;
+    }
+    
+    public boolean canJump(int i,int j)
+    {
+    	int distanceI = i - this.click[0];
+    	int distanceJ = j - this.click[1];
+    	if(distanceI < 0) distanceI *= -1;
+    	if(distanceJ < 0) distanceJ *= -1;
+    	
+    	
+    	for(int x=0; x < distanceI; x++)
+    	{
+    		for(int y=0 ; y < distanceJ; y++)
+    		{
+    			if(map[y][x] != null) return false;
+    		}
+    	}
+    	return true;
+    	
     }
     
 
@@ -253,17 +277,16 @@ public class core {
 
     public boolean movePiecePlayer(int i,int j, int finalI ,int finalJ){
         piece mark = map[j][i];
-        int count_move = 4;
-        if(mark.getName() == "scout")
-        {
-            count_move = 36;
-        }
+        
+//        if(!canJump(finalI,finalJ)) return false;
 
         int[][] movement = mark.canMove(i,j);
         
 
-        for(int c=0;c<count_move;c++){
+        for(int c=0;c<movement.length;c++){
             if((movement[c][0]==finalI)&&(movement[c][1]==finalJ)){
+            	
+            		
                 if(map[finalJ][finalI]==null){
                     map[j][i] = null;
                     map[finalJ][finalI] = mark;
@@ -272,7 +295,7 @@ public class core {
                 }
                 else{
                     if(mark.getOwner()==map[finalJ][finalI].getOwner()){
-                        break;
+                    	 return false;
                     }
                     else{
                         if(mark.getScore()==map[finalJ][finalI].getScore()){
@@ -284,7 +307,13 @@ public class core {
                             return true;
                         }
                         else{
-                            if(mark.attack(map[finalJ][finalI])){
+                        	if(mark.getScore() == map[finalJ][finalI].getScore()) {
+                        		System.out.println(mark.getOwner() +"'s " +  mark.getName() + " attacked " + mark.getName()+ " --> both removed");
+                                map[j][i].AmountInsertDecreace();
+                                map[j][i] = null;
+                                return true;
+                        	}
+                        	else if(mark.attack(map[finalJ][finalI])){
                                 System.out.println(mark.getOwner() +"'s " +  mark.getName() + " attacked " +  map[finalJ][finalI].getName()+ " --> "+ map[finalJ][finalI].getName() +" removed");
                                 map[finalJ][finalI].AmountInsertDecreace();
                                 map[j][i] = null;
@@ -292,8 +321,8 @@ public class core {
                                 return true;
                             }
                             else{
-                                System.out.println(mark.getOwner() +"'s " +  mark.getName() + " attacked " + mark.getName()+ " --> both removed");
-                                map[j][i].AmountInsertDecreace();
+                            	System.out.println(mark.getOwner() +"'s " +  mark.getName() + " attacked " +  map[finalJ][finalI].getName()+ " --> "+  mark.getName() +" removed");
+                            	mark.AmountInsertDecreace();
                                 map[j][i] = null;
                                 return true;
                             }
@@ -313,12 +342,13 @@ public class core {
             System.out.print("|" + space );
         }
         else{
-            if(mark.getOwner().name == "bot"){
-                System.out.print("|" + "    op    " );
-            }
-            else{
-                System.out.print("|" + mark );
-            }
+        	 System.out.print("|" + mark );
+//            if(mark.getOwner().name == "bot"){
+//                System.out.print("|" + "    op    " );
+//            }
+//            else{
+//                System.out.print("|" + mark );
+//            }
         }
 
     }
@@ -462,8 +492,13 @@ public class core {
     	else
     	{
     		boolean result = movePiecePlayer(click[0],click[1],i,j);
-    		this.click[0] = -1;
-    		this.click[1] = -1;
+    		if(result)
+    		{
+    			this.click[0] = -1;
+        		this.click[1] = -1;
+        		this.botMove();
+        		this.printmap();
+    		}
     		return result;
     	}
     }

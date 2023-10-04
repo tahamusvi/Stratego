@@ -12,12 +12,11 @@ public class scout extends piece {
     }
 
     public boolean attack(piece markPiece) {
-        if (this.getScore() > markPiece.getScore()) {
-            return true;
-        } else {
-            return false;
-        }
+    	System.out.println(this.getScore() );
+    	System.out.println(markPiece.getScore() );
 
+        if (this.getScore() > markPiece.getScore()) return true;
+        return false;
     }
 
 
