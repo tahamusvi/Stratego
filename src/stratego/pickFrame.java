@@ -14,7 +14,7 @@ public class pickFrame extends JFrame implements ActionListener{
 
     public pickFrame(core table) {
         super("PICK");
-        
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\progeramming\\stratego\\Stratego.png"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 

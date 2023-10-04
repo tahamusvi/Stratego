@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -24,6 +25,7 @@ public class playFrame extends JFrame implements ActionListener{
     	
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\progeramming\\stratego\\Stratego.png"));
 
         buttons = new JButton[10][10];
         table = tableinput;

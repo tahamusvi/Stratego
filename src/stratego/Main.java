@@ -2,6 +2,7 @@ package stratego;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.security.PublicKey;
 
@@ -39,6 +40,7 @@ public class Main extends JFrame {
 	        setSize(320, 270);
 	        setLayout(new FlowLayout());
 	        setResizable(false);
+	        this.setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\progeramming\\stratego\\Stratego.png"));
 
 	        wellcomArea = new JLabel("Welcome to our Game!");
 	        nameArea = new JLabel("Please enter your name (if you don't, we'll use 'user'):");

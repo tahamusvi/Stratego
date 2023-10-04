@@ -14,6 +14,7 @@ public class AboutUsFrame extends JFrame {
 
     public AboutUsFrame() {
         setTitle("About Us");
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\progeramming\\stratego\\Stratego.png"));
         setSize(370, 260);
         setLayout(new FlowLayout());
 
@@ -29,20 +30,20 @@ public class AboutUsFrame extends JFrame {
             );
         		textArea.setEditable(false);
                 textArea.setWrapStyleWord(true);
-                
+
         person1Button = new JButton("sahel github");
         person2Button = new JButton("taha github");
-        
+
         JPanel panel1 = new JPanel();
         JPanel panel2 = new JPanel();
-        
+
         panel1.add(textArea);
         panel2.add(person1Button);
         panel2.add(person2Button);
-        
+
         add(panel1);
         add(panel2);
-        
+
 
         person1Button.addActionListener(new ActionListener() {
             @Override
@@ -67,5 +68,5 @@ public class AboutUsFrame extends JFrame {
         }
     }
 
-    
+
 }

@@ -20,11 +20,12 @@ public class valueFrame extends JFrame implements ActionListener{
     private JLabel[] labels;
     String selectedpiece;
     
+    
 
     public valueFrame(pickFrame parentFrame) {
         super("set value");
         this.parentFrame=parentFrame;
-
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\progeramming\\stratego\\Stratego.png"));
        
         setLayout(new GridLayout(6, 4));
 
