@@ -97,9 +97,6 @@ public class core {
     		if(i == 2 || i == 3 || i == 6 || i == 7) {
     			return "w";
     		}
-    		else {
-    			return "";
-    		}
     	}
     	if(map[j][i] != null) 
     	{
@@ -110,7 +107,10 @@ public class core {
     			return map[j][i].getName();
     		}
     	}
-    	return "None";
+    	else
+    	{
+    		return "";
+    	}
     }    
 
     public boolean botMove() {
