@@ -92,8 +92,6 @@ public class playFrame extends JFrame implements ActionListener{
             			System.out.println(check);
             		}
             		
-//            		buttons[i][j].setText(table.getPieceNameOnMap(j, i));
-            		
             	}
             }
            int status = table.whoWin();

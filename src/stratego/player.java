@@ -35,7 +35,7 @@ public class player {
     public boolean isRemain() {
     	for(piece mark : this.pieces){
             if(mark.isRemain()){
-//                return true;
+                return true;
             }
         }
         return false;
