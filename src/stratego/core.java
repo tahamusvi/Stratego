@@ -18,6 +18,8 @@ import stratego.pieces.scout;
 import stratego.pieces.sergent;
 import stratego.pieces.spy;
 
+
+
 public class core {
     private int width = 1;
     private int length = 1;
@@ -506,7 +508,7 @@ public class core {
     	return false;
     }
     
-    public boolean PieceGo(int i,int j)
+    public boolean PieceGo(playFrame pFrame,int i,int j)
     {
     	
     	if((this.click[0] == -1) && (this.click[1] == -1))
@@ -522,6 +524,12 @@ public class core {
     		{
         		this.botMove();
         		this.printmap();
+        		for(int x = 0 ; x < 9 ; x++) {
+        			for(int y = 0 ; y < 9 ; y++)
+        			{
+        				pFrame.buttons[x][y].setText(this.getPieceNameOnMap(y, x));
+        			}
+        		}
     		}
     		this.click[0] = -1;
     		this.click[1] = -1;
