@@ -20,100 +20,69 @@ public class scout extends piece {
     }
 
 
-    public int[][] canMove(int i,int j){
-
-        int[][] canMoves = new int[100][2];
+    public int[][] canMove(int i, int j) {
+        int[][] canMoves = new int[40][2];
         int camount = 0;
 
-        for(int k=0;k<10;k++){
-            if(i+k<10){
-                canMoves[camount][0] = i+k;
+        for (int k = 0; k < 10; k++) {
+            if (i + k < 10) {
+                canMoves[camount][0] = i + k;
                 canMoves[camount][1] = j;
-                camount++;
-            }
-            else{
+            } else {
                 canMoves[camount][0] = -2;
-                camount++;
             }
+            camount++;
         }
-        for(int k=0;k<10;k++){
-            if(j+k<10){
+
+        for (int k = 0; k < 10; k++) {
+            if (j + k < 10) {
                 canMoves[camount][0] = i;
-                canMoves[camount][1] = j+k;
-                camount++;
-            }
-            else{
+                canMoves[camount][1] = j + k;
+            } else {
                 canMoves[camount][0] = -2;
-                camount++;
             }
+            camount++;
         }
-        for(int k=0;k<10;k++){
-            if(i-k>=0){
-                canMoves[camount][0] = i-k;
+
+        for (int k = 0; k < 10; k++) {
+            if (i - k >= 0) {
+                canMoves[camount][0] = i - k;
                 canMoves[camount][1] = j;
-                camount++;
-            }
-            else{
+            } else {
                 canMoves[camount][0] = -2;
-                camount++;
             }
+            camount++;
         }
-        for(int k=0;k<10;k++){
-            if(j-k>=0){
+
+        for (int k = 0; k < 10; k++) {
+            if (j - k >= 0) {
                 canMoves[camount][0] = i;
-                canMoves[camount][1] = j-k;
-                camount++;
-            }
-            else{
+                canMoves[camount][1] = j - k;
+            } else {
                 canMoves[camount][0] = -2;
-                camount++;
             }
+            camount++;
         }
 
+        int[][] invalidMoves = {
+                {2, 5},
+                {2, 4},
+                {3, 5},
+                {3, 4},
+                {6,4},
+                {6, 5},
+                {7, 4},
+                {7, 5}
+        };
 
-
-
-
-
-
-        for(int u=0;u<4;u++){
-            if((canMoves[u][0]==2)){
-                if(canMoves[u][1]==5){
+        for (int u = 0; u < camount; u++) {
+            for (int[] invalidMove : invalidMoves) {
+                if (canMoves[u][0] == invalidMove[0] && canMoves[u][1] == invalidMove[1]) {
                     canMoves[u][0] = -2;
-                }
-                if(canMoves[u][1]==4){
-                    canMoves[u][0] = -2;
+                    break;
                 }
             }
-            if((canMoves[u][0]==3)){
-                if(canMoves[u][1]==5){
-                    canMoves[u][0] = -2;
-                }
-                if(canMoves[u][1]==4){
-                    canMoves[u][0] = -2;
-                }
-            }
-            if((canMoves[u][0]==6)){
-                if(canMoves[u][1]==5){
-                    canMoves[u][0] = -2;
-                }
-                if(canMoves[u][1]==4){
-                    canMoves[u][0] = -2;
-                }
-            }
-            if((canMoves[u][0]==7)){
-                if(canMoves[u][1]==5){
-                    canMoves[u][0] = -2;
-                }
-                if(canMoves[u][1]==4){
-                    canMoves[u][0] = -2;
-                }
-            }
-
         }
-
-
-
 
         return canMoves;
     }

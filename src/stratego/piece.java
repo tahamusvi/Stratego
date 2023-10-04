@@ -1,4 +1,6 @@
 package stratego;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class piece {
     private player owner;
@@ -15,91 +17,55 @@ public abstract class piece {
         this.owner = ply;
 
     }
-    public int[][] canMove(int i,int j){
 
-        int[][] canMoves = new int[4][2];
-        int camount = 0;
+    public int[][] canMove(int i, int j) {
+        List<int[]> canMoves = new ArrayList<>();
 
-        if(i<=98){
-            canMoves[camount][0] = i+1;
-            canMoves[camount][1] = j;
-            camount++;
-        }
-        else{
-            canMoves[camount][0] = -2;
-            camount++;
+        if (i <= 98) {
+            canMoves.add(new int[]{i + 1, j});
+        } else {
+            canMoves.add(new int[]{-2, 0});
         }
 
-        if(j<=98){
-            canMoves[camount][0] = i;
-            canMoves[camount][1] = j+1;
-            camount++;
-        }
-        else{
-            canMoves[camount][0] = -2;
-            camount++;
+        if (j <= 98) {
+            canMoves.add(new int[]{i, j + 1});
+        } else {
+            canMoves.add(new int[]{-2, 0});
         }
 
-        if(i-1>=0){
-            canMoves[camount][0] = i-1;
-            canMoves[camount][1] = j;
-            camount++;
-        }
-        else{
-            canMoves[camount][0] = -2;
-            camount++;
-        }
-        if(j-1>=0){
-            canMoves[camount][0] = i;
-            canMoves[camount][1] = j-1;
-            camount++;
-        }
-        else{
-            canMoves[camount][0] = -2;
-            camount++;
+        if (i - 1 >= 0) {
+            canMoves.add(new int[]{i - 1, j});
+        } else {
+            canMoves.add(new int[]{-2, 0});
         }
 
+        if (j - 1 >= 0) {
+            canMoves.add(new int[]{i, j - 1});
+        } else {
+            canMoves.add(new int[]{-2, 0});
+        }
 
-        for(int u=0;u<4;u++){
-            if((canMoves[u][0]==2)){
-                if(canMoves[u][1]==5){
-                    canMoves[u][0] = -2;
-                }
-                if(canMoves[u][1]==4){
-                    canMoves[u][0] = -2;
+        int[][] invalidMoves = {
+                {2, 5},
+                {2, 4},
+                {3, 5},
+                {3, 4},
+                {6, 5},
+                {6, 4},
+                {7, 5},
+                {7, 4}
+        };
+
+        for (int[] move : canMoves) {
+            for (int[] invalidMove : invalidMoves) {
+                if (move[0] == invalidMove[0] && move[1] == invalidMove[1]) {
+                    move[0] = -2;
+                    break;
                 }
             }
-            if((canMoves[u][0]==3)){
-                if(canMoves[u][1]==5){
-                    canMoves[u][0] = -2;
-                }
-                if(canMoves[u][1]==4){
-                    canMoves[u][0] = -2;
-                }
-            }
-            if((canMoves[u][0]==6)){
-                if(canMoves[u][1]==5){
-                    canMoves[u][0] = -2;
-                }
-                if(canMoves[u][1]==4){
-                    canMoves[u][0] = -2;
-                }
-            }
-            if((canMoves[u][0]==7)){
-                if(canMoves[u][1]==5){
-                    canMoves[u][0] = -2;
-                }
-                if(canMoves[u][1]==4){
-                    canMoves[u][0] = -2;
-                }
-            }
-
         }
 
-
-
-
-        return canMoves;
+        return canMoves.toArray(new int[canMoves.size()][]);
     }
 
     public boolean isAlive(){

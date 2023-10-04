@@ -275,55 +275,45 @@ public class core {
         return ply;
     }
 
-    public boolean movePiecePlayer(int i,int j, int finalI ,int finalJ){
-        piece mark = map[j][i];
-        
-//        if(!canJump(finalI,finalJ)) return false;
+    public boolean movePiecePlayer(int srcRow, int srcCol, int destRow, int destCol) {
+        piece currentPiece = map[srcCol][srcRow];
 
-        int[][] movement = mark.canMove(i,j);
-        
+        int[][] possibleMoves = currentPiece.canMove(srcRow, srcCol);
 
-        for(int c=0;c<movement.length;c++){
-            if((movement[c][0]==finalI)&&(movement[c][1]==finalJ)){
-            	
-            		
-                if(map[finalJ][finalI]==null){
-                    map[j][i] = null;
-                    map[finalJ][finalI] = mark;
-                    System.out.println(mark.getOwner() +"'s " +  mark.getName() + " moved");
+        for (int i = 0; i < possibleMoves.length; i++) {
+            int moveRow = possibleMoves[i][0];
+            int moveCol = possibleMoves[i][1];
+
+            if (moveRow == destRow && moveCol == destCol) {
+                piece destinationPiece = map[destCol][destRow];
+
+                if (destinationPiece == null) {
+                    map[srcCol][srcRow] = null;
+                    map[destCol][destRow] = currentPiece;
+                    System.out.println(currentPiece.getOwner() + "'s " + currentPiece.getName() + " moved");
                     return true;
-                }
-                else{
-                    if(mark.getOwner()==map[finalJ][finalI].getOwner()){
-                    	 return false;
-                    }
-                    else{
-                        if(mark.getScore()==map[finalJ][finalI].getScore()){
-                            System.out.println(mark.getOwner() +"'s " + mark.getName() + " attacked " + map[finalJ][finalI].getName()+ " --> both removed");
-                            map[j][i].AmountInsertDecreace();
-                            map[finalJ][finalI].AmountInsertDecreace();
-                            map[j][i] = null;
-                            map[finalJ][finalI] = null;
+                } else {
+                    if (currentPiece.getOwner() == destinationPiece.getOwner()) {
+                        return false;
+                    } else {
+                        if (currentPiece.getScore() == destinationPiece.getScore()) {
+                            System.out.println(currentPiece.getOwner() + "'s " + currentPiece.getName() + " attacked " + destinationPiece.getName() + " --> both removed");
+                            currentPiece.AmountInsertDecreace();
+                            destinationPiece.AmountInsertDecreace();
+                            map[srcCol][srcRow] = null;
+                            map[destCol][destRow] = null;
                             return true;
-                        }
-                        else{
-                        	if(mark.getScore() == map[finalJ][finalI].getScore()) {
-                        		System.out.println(mark.getOwner() +"'s " +  mark.getName() + " attacked " + mark.getName()+ " --> both removed");
-                                map[j][i].AmountInsertDecreace();
-                                map[j][i] = null;
+                        } else {
+                            if (currentPiece.attack(destinationPiece)) {
+                                System.out.println(currentPiece.getOwner() + "'s " + currentPiece.getName() + " attacked " + destinationPiece.getName() + " --> " + destinationPiece.getName() + " removed");
+                                destinationPiece.AmountInsertDecreace();
+                                map[srcCol][srcRow] = null;
+                                map[destCol][destRow] = currentPiece;
                                 return true;
-                        	}
-                        	else if(mark.attack(map[finalJ][finalI])){
-                                System.out.println(mark.getOwner() +"'s " +  mark.getName() + " attacked " +  map[finalJ][finalI].getName()+ " --> "+ map[finalJ][finalI].getName() +" removed");
-                                map[finalJ][finalI].AmountInsertDecreace();
-                                map[j][i] = null;
-                                map[finalJ][finalI] = mark;
-                                return true;
-                            }
-                            else{
-                            	System.out.println(mark.getOwner() +"'s " +  mark.getName() + " attacked " +  map[finalJ][finalI].getName()+ " --> "+  mark.getName() +" removed");
-                            	mark.AmountInsertDecreace();
-                                map[j][i] = null;
+                            } else {
+                                System.out.println(currentPiece.getOwner() + "'s " + currentPiece.getName() + " attacked " + destinationPiece.getName() + " --> " + currentPiece.getName() + " removed");
+                                currentPiece.AmountInsertDecreace();
+                                map[srcCol][srcRow] = null;
                                 return true;
                             }
                         }
