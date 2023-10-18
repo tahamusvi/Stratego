@@ -1,4 +1,7 @@
 # Stratego
+#### Video Demo:  (https://youtu.be/p5d04F9CV2A)
+#### Description:
+
 
 This game was created by Sahel and Taha as their final project for the CS50 course. The game combines Taha's work on the core functionality with Sahel's contribution to the graphical user interface (GUI).
 
