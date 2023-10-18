@@ -5,9 +5,27 @@
 
 This game was created by Sahel and Taha as their final project for the CS50 course. The game combines Taha's work on the core functionality with Sahel's contribution to the graphical user interface (GUI).
 
+This is actually a Gameboard that we tried to create its electronic version.
+
+In this context, "core APIs" refers to the fundamental application programming interfaces (APIs) that are provided by the underlying system or framework. These APIs are designed to perform essential tasks and provide basic functionality.
+
+The game GUI (Graphical User Interface) is the visual interface that allows users to interact with the game. To implement the search feature within the GUI, I utilized the core APIs, which means I leveraged the built-in functionalities provided by the system or framework on which the game is built.
+
+
 ## Game
 
 Stratego is a strategic board game that involves two players and a board with a grid of squares. The objective of the game is to capture the opponent's flag while protecting your own. Each player has a set of pieces with different ranks and abilities, and the outcome of each battle is determined by the ranks of the pieces involved.
+
+## Files
+
+-The classes inside the 'pieces' folder are used to describe the game pieces.
+-The 'core' class is responsible for managing the game's core and logic, and its functions are called within the 'gui' classes.
+-The 'piece' class is the parent class for all the member classes inside the 'pieces' folder. The 'player' class represents a player entity, including their name and their pieces.
+-The 'Main' class is the main frame of the game, and the 'main' function is located inside it. At the beginning of the game, the frame of this class is displayed.
+-The 'pickFrame' class is a class that contains a frame for selecting the value of each piece.
+-The 'playframe' class is a class that contains a frame created for playing the game.
+-The 'valueFrame' class is a frame that is actually opened within the 'pickFrame' class for selecting the pieces.
+-The 'AboutUsFrame' class is a class that includes a frame where information about the game developers and their GitHub IDs is displayed."
 
 ## Installation
 
@@ -47,3 +65,4 @@ Roles:
 - Core: [Taha](https://github.com/TahaM8000)
 
 For more of our projects, visit our GitHub page linked above.
+I love you taha
