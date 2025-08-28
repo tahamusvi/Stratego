@@ -65,4 +65,3 @@ Roles:
 - Core: [Taha](https://github.com/TahaM8000)
 
 For more of our projects, visit our GitHub page linked above.
-I love you taha
